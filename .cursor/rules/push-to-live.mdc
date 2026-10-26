@@ -1,0 +1,15 @@
+---
+description: Commit and push completed work to origin so production stays in sync
+alwaysApply: true
+---
+
+# Push changes to live
+
+When you finish a task that modifies this project:
+
+1. Do **not** leave meaningful changes only on disk — commit and push to the remote (`origin`, typically `main`) unless the user explicitly says not to push in that message.
+2. Follow the git safety protocol: no force push to main, no secrets in commits, no amending pushed commits unless the user asks.
+3. Use concise commit messages that explain why.
+4. After push, briefly confirm the branch and that the remote is updated.
+
+If there is nothing to commit, skip commit/push and say so.

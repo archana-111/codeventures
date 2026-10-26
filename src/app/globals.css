@@ -348,6 +348,19 @@ html.dark .header-brand-logo {
   -webkit-mask-image: linear-gradient(to top, #000 64%, rgba(0, 0, 0, 0.92) 86%, transparent 100%);
 }
 
+.sst-bg-overlay--light {
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 100%
+  );
+}
+
+html:not(.dark) .sst-bg.sst-bg {
+  filter: brightness(1.02) contrast(1.02) saturate(1.02);
+}
+
 .sst-pattern {
   display: none;
 }
@@ -638,6 +651,19 @@ html.dark .header-brand-logo {
   pointer-events: none;
   mask-image: linear-gradient(to top, #000 58%, rgba(0, 0, 0, 0.9) 82%, transparent 100%);
   -webkit-mask-image: linear-gradient(to top, #000 58%, rgba(0, 0, 0, 0.9) 82%, transparent 100%);
+}
+
+.sst-m-overlay--light {
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.1) 60%,
+    transparent 100%
+  );
+}
+
+html:not(.dark) .sst-m-art.sst-m-art {
+  filter: brightness(1.02) contrast(1.02) saturate(1.02);
 }
 
 @media (max-width: 760px) {

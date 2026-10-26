@@ -19,6 +19,7 @@ import {
   UserPlus,
 } from 'lucide-react';
 import { PRICING_PLANS } from '@/data/codeventures-data';
+import { useTheme } from '@/components/ThemeProvider';
 
 interface PartnershipModelsProps {
   onOpenApply?: (selectedModel?: string) => void;
@@ -31,6 +32,9 @@ const FEATURE_ICONS = [
 ];
 
 export default function PartnershipModels({ onOpenApply }: PartnershipModelsProps) {
+  const { theme, mounted } = useTheme();
+  const siteLight = mounted && theme === 'light';
+
   const openApply = (modelName: string) => {
     if (onOpenApply) onOpenApply(modelName);
     else document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
@@ -53,6 +57,8 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 items-stretch mb-12">
           {PRICING_PLANS.map((plan, planIdx) => {
             const featured = Boolean(plan.popular);
+            const featuredDark = featured && !siteLight;
+            const featuredLight = featured && siteLight;
             const icons = FEATURE_ICONS[planIdx] ?? FEATURE_ICONS[0];
             const introFeature = featured ? plan.features[0] : null;
             const listFeatures = featured ? plan.features.slice(1) : plan.features;
@@ -61,48 +67,63 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
               <article
                 key={plan.id}
                 className={`relative flex flex-col overflow-hidden rounded-[22px] p-7 sm:p-8 ${
-                  featured
+                  featuredDark
                     ? 'text-white border border-[#00BFA5]/35 shadow-[0_24px_70px_rgba(0,191,165,0.22)]'
-                    : 'bg-cv-elevated border border-cv-border-subtle text-cv-fg'
+                    : featuredLight
+                      ? 'bg-white text-neutral-950 border border-[#00BFA5]/35 shadow-[0_16px_48px_rgba(0,191,165,0.18)]'
+                      : 'bg-cv-elevated border border-cv-border-subtle text-cv-fg'
                 }`}
                 style={
-                  featured
+                  featuredDark
                     ? {
                         background:
                           'linear-gradient(180deg, #101614 0%, #0a2c28 36%, #00BFA5 118%)',
                       }
-                    : undefined
+                    : featuredLight
+                      ? {
+                          background:
+                            'linear-gradient(180deg, #ffffff 0%, #ecfbf8 42%, rgba(0,191,165,0.22) 118%)',
+                        }
+                      : undefined
                 }
               >
                 <div className="flex items-start justify-between gap-4 mb-2">
-                  <h3 className={`text-[26px] sm:text-[30px] font-semibold tracking-[-0.03em] leading-[1.1] ${featured ? 'text-white' : 'text-cv-fg'}`}>
+                  <h3
+                    className={`text-[26px] sm:text-[30px] font-semibold tracking-[-0.03em] leading-[1.1] ${
+                      featuredDark ? 'text-white' : 'text-cv-fg'
+                    }`}
+                  >
                     {plan.name}
                   </h3>
-                  <span className={`max-w-[42%] pt-1.5 text-right text-[10px] font-semibold uppercase tracking-[0.12em] leading-snug ${featured ? 'text-white/45' : 'text-cv-fg-muted'}`}>
+                  <span
+                    className={`max-w-[42%] pt-1.5 text-right text-[10px] font-semibold uppercase tracking-[0.12em] leading-snug ${
+                      featuredDark ? 'text-white/45' : 'text-cv-fg-muted'
+                    }`}
+                  >
                     {plan.timeline}
                   </span>
                 </div>
 
-                <p className={`text-sm mb-6 ${featured ? 'text-white/55' : 'text-cv-fg-muted'}`}>{plan.subtitle}</p>
+                <p className={`text-sm mb-6 ${featuredDark ? 'text-white/55' : 'text-cv-fg-muted'}`}>{plan.subtitle}</p>
 
-                <div className={`border-t pt-6 mb-8 ${featured ? 'border-white/[0.1]' : 'border-cv-border-subtle'}`}>
-                  <p className={`text-[22px] sm:text-[26px] font-semibold tracking-[-0.03em] leading-tight ${featured ? 'text-white' : 'text-cv-fg'}`}>
+                <div className={`border-t pt-6 mb-8 ${featuredDark ? 'border-white/[0.1]' : 'border-cv-border-subtle'}`}>
+                  <p className={`text-[22px] sm:text-[26px] font-semibold tracking-[-0.03em] leading-tight ${featuredDark ? 'text-white' : 'text-cv-fg'}`}>
                     {plan.price}
                   </p>
-                  <p className={`text-sm mt-1.5 ${featured ? 'text-white/50' : 'text-cv-fg-muted'}`}>{plan.priceNote}</p>
-                  <p className={`text-sm mt-2 ${featured ? 'text-white/55' : 'text-cv-fg-muted'}`}>{plan.equity}</p>
+                  <p className={`text-sm mt-1.5 ${featuredDark ? 'text-white/50' : 'text-cv-fg-muted'}`}>{plan.priceNote}</p>
+                  <p className={`text-sm mt-2 ${featuredDark ? 'text-white/55' : 'text-cv-fg-muted'}`}>{plan.equity}</p>
                 </div>
 
                 {introFeature && (
-                  <p className={`text-sm mb-4 ${featured ? 'text-white/70' : 'text-cv-fg-subtle'}`}>{introFeature}:</p>
+                  <p className={`text-sm mb-4 ${featuredDark ? 'text-white/70' : 'text-cv-fg-subtle'}`}>{introFeature}:</p>
                 )}
 
                 <ul className="space-y-3 mb-10 flex-1">
                   {listFeatures.map((feat, i) => {
                     const Icon = icons[i % icons.length];
                     return (
-                      <li key={feat} className={`flex items-start gap-3 text-sm leading-snug ${featured ? 'text-white/80' : 'text-cv-fg-subtle'}`}>
-                        <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${featured ? 'text-white/70' : 'text-cv-fg-muted'}`} strokeWidth={1.75} />
+                      <li key={feat} className={`flex items-start gap-3 text-sm leading-snug ${featuredDark ? 'text-white/80' : 'text-cv-fg-subtle'}`}>
+                        <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${featuredDark ? 'text-white/70' : 'text-cv-fg-muted'}`} strokeWidth={1.75} />
                         <span>{feat}</span>
                       </li>
                     );

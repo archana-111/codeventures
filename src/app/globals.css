@@ -421,6 +421,15 @@ html:not(.dark) .sst-bg.sst-bg {
   overflow: hidden;
 }
 
+html:not(.dark) .sst-chip {
+  background: rgba(255, 255, 255, 0.94);
+  color: #0a0c10;
+  border: 1px solid rgba(10, 12, 16, 0.1);
+  box-shadow:
+    0 calc(18 * var(--u)) calc(42 * var(--u)) rgba(15, 23, 42, 0.1),
+    0 0 calc(20 * var(--u)) rgba(0, 191, 165, 0.12);
+}
+
 .sst-copy {
   position: absolute;
   left: 10cqw;
@@ -620,6 +629,13 @@ html:not(.dark) .sst-bg.sst-bg {
   font-size: 13px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+html:not(.dark) .sst-m-chip {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0a0c10;
+  border: 1px solid rgba(10, 12, 16, 0.1);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
 .sst-m-art,

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { PORTFOLIO_PROJECTS, PortfolioProject } from '@/data/codeventures-data';
+import { useTheme } from '@/components/ThemeProvider';
 
 const PORTFOLIO_GRADIENTS = [
   'radial-gradient(ellipse 140% 90% at 8% -8%, #7ff5e0 0%, #00BFA5 24%, rgba(0,191,165,0.14) 46%, transparent 70%)',
@@ -26,27 +27,41 @@ function portfolioGradientFor(id: string) {
   return PORTFOLIO_GRADIENTS[hashSeed(id) % PORTFOLIO_GRADIENTS.length];
 }
 
-function PortfolioDarkCard({
+function PortfolioCard({
   children,
   className = '',
   seed,
+  light,
 }: {
   children: React.ReactNode;
   className?: string;
   seed: string;
+  light: boolean;
 }) {
   return (
     <article
-      className={`relative overflow-hidden rounded-[28px] border border-white/[0.08] bg-[#0a0c10] text-white shadow-[0_24px_60px_rgba(0,0,0,0.45)] ${className}`}
+      className={`relative overflow-hidden rounded-[28px] ${
+        light
+          ? 'border border-neutral-200/90 bg-white text-neutral-950 shadow-[0_12px_40px_rgba(15,23,42,0.08)]'
+          : 'border border-white/[0.08] bg-[#0a0c10] text-white shadow-[0_24px_60px_rgba(0,0,0,0.45)]'
+      } ${className}`}
     >
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background: portfolioGradientFor(seed),
+          opacity: light ? 0.55 : 1,
         }}
         aria-hidden
       />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-transparent via-[#0a0c10]/40 to-[#0a0c10]/90" aria-hidden />
+      <div
+        className={`pointer-events-none absolute inset-0 z-0 ${
+          light
+            ? 'bg-gradient-to-b from-white/30 via-white/70 to-white/95'
+            : 'bg-gradient-to-b from-transparent via-[#0a0c10]/40 to-[#0a0c10]/90'
+        }`}
+        aria-hidden
+      />
       <div className="relative z-[1] h-full flex flex-col">{children}</div>
     </article>
   );
@@ -58,6 +73,8 @@ function portfolioSummary(project: PortfolioProject) {
 }
 
 export default function FeaturedPortfolio() {
+  const { theme, mounted } = useTheme();
+  const siteLight = mounted && theme === 'light';
   const [selectedFilter, setSelectedFilter] = useState<'All' | 'SaaS' | 'Deep Tech' | 'Mobile' | 'Marketplace'>('All');
 
   const filteredProjects =
@@ -107,19 +124,29 @@ export default function FeaturedPortfolio() {
             const isReversed = index % 2 === 1;
 
             return (
-              <PortfolioDarkCard key={project.id} seed={project.id} className="p-6 sm:p-8 lg:p-9">
+              <PortfolioCard key={project.id} seed={project.id} light={siteLight} className="p-6 sm:p-8 lg:p-9">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
                   <div className={`lg:col-span-6 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <h3 className="text-3xl sm:text-[34px] font-bold text-white tracking-[-0.035em] leading-[1.08] mb-3">
+                    <h3
+                      className={`text-3xl sm:text-[34px] font-bold tracking-[-0.035em] leading-[1.08] mb-3 ${
+                        siteLight ? 'text-neutral-950' : 'text-white'
+                      }`}
+                    >
                       {project.name}
                     </h3>
 
-                    <p className="text-white/75 text-base leading-relaxed mb-4 max-w-lg">
+                    <p
+                      className={`text-base leading-relaxed mb-4 max-w-lg ${
+                        siteLight ? 'text-neutral-600' : 'text-white/75'
+                      }`}
+                    >
                       {portfolioSummary(project)}
                     </p>
 
-                    <p className="text-sm text-white/60 mb-5">
-                      <span className="font-semibold text-white/90">Outcome · </span>
+                    <p className={`text-sm mb-5 ${siteLight ? 'text-neutral-500' : 'text-white/60'}`}>
+                      <span className={`font-semibold ${siteLight ? 'text-neutral-800' : 'text-white/90'}`}>
+                        Outcome ·{' '}
+                      </span>
                       {project.impact}
                     </p>
 
@@ -127,7 +154,11 @@ export default function FeaturedPortfolio() {
                       {project.tags.slice(0, 4).map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/75"
+                          className={`rounded-full px-3 py-1 text-xs ${
+                            siteLight
+                              ? 'bg-neutral-100 text-neutral-700 ring-1 ring-neutral-200/80'
+                              : 'bg-white/10 text-white/75'
+                          }`}
                         >
                           {tag}
                         </span>
@@ -136,7 +167,13 @@ export default function FeaturedPortfolio() {
                   </div>
 
                   <div className={`lg:col-span-6 ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}>
-                    <div className="relative rounded-[20px] overflow-hidden border border-white/[0.08] bg-black/40 aspect-[16/10]">
+                    <div
+                      className={`relative rounded-[20px] overflow-hidden aspect-[16/10] ${
+                        siteLight
+                          ? 'border border-neutral-200/90 bg-neutral-100'
+                          : 'border border-white/[0.08] bg-black/40'
+                      }`}
+                    >
                       <Image
                         src={project.image}
                         alt={project.name}
@@ -147,7 +184,7 @@ export default function FeaturedPortfolio() {
                     </div>
                   </div>
                 </div>
-              </PortfolioDarkCard>
+              </PortfolioCard>
             );
           })}
         </div>
@@ -155,8 +192,14 @@ export default function FeaturedPortfolio() {
         {secondaryProjects.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {secondaryProjects.map((project: PortfolioProject) => (
-              <PortfolioDarkCard key={project.id} seed={project.id} className="flex flex-col p-5">
-                <div className="relative rounded-[16px] overflow-hidden border border-white/[0.08] bg-black/40 aspect-[16/11] mb-4">
+              <PortfolioCard key={project.id} seed={project.id} light={siteLight} className="flex flex-col p-5">
+                <div
+                  className={`relative rounded-[16px] overflow-hidden aspect-[16/11] mb-4 ${
+                    siteLight
+                      ? 'border border-neutral-200/90 bg-neutral-100'
+                      : 'border border-white/[0.08] bg-black/40'
+                  }`}
+                >
                   <Image
                     src={project.image}
                     alt={project.name}
@@ -165,23 +208,35 @@ export default function FeaturedPortfolio() {
                     className="object-cover"
                   />
                 </div>
-                <h4 className="text-xl font-bold text-white tracking-[-0.03em] leading-[1.1] mb-2">
+                <h4
+                  className={`text-xl font-bold tracking-[-0.03em] leading-[1.1] mb-2 ${
+                    siteLight ? 'text-neutral-950' : 'text-white'
+                  }`}
+                >
                   {project.name}
                 </h4>
-                <p className="text-sm text-white/65 leading-relaxed line-clamp-2 mb-3">
+                <p
+                  className={`text-sm leading-relaxed line-clamp-2 mb-3 ${
+                    siteLight ? 'text-neutral-600' : 'text-white/65'
+                  }`}
+                >
                   {portfolioSummary(project)}
                 </p>
                 <div className="mt-auto flex flex-wrap gap-1.5">
                   {project.tags.slice(0, 2).map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] text-white/75"
+                      className={`rounded-full px-2.5 py-0.5 text-[11px] ${
+                        siteLight
+                          ? 'bg-neutral-100 text-neutral-700 ring-1 ring-neutral-200/80'
+                          : 'bg-white/10 text-white/75'
+                      }`}
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </PortfolioDarkCard>
+              </PortfolioCard>
             ))}
           </div>
         )}

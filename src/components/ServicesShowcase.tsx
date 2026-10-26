@@ -3,19 +3,22 @@
 import React from 'react';
 import Image from 'next/image';
 import { CAPABILITIES, type CapabilityItem } from '@/data/codeventures-data';
+import { useTheme } from '@/components/ThemeProvider';
 
 function ServiceCard({
   cap,
   variant,
   wide = false,
   className = '',
+  siteLight,
 }: {
   cap: CapabilityItem;
   variant: 'light' | 'featured';
   wide?: boolean;
   className?: string;
+  siteLight: boolean;
 }) {
-  const light = variant === 'light';
+  const light = variant === 'light' || (variant === 'featured' && siteLight);
   const featured = variant === 'featured';
 
   return (
@@ -143,6 +146,8 @@ function ServiceCard({
 
 export default function ServicesShowcase() {
   const [web, deep, mobile] = CAPABILITIES;
+  const { theme, mounted } = useTheme();
+  const siteLight = mounted && theme === 'light';
 
   return (
     <section
@@ -165,8 +170,8 @@ export default function ServicesShowcase() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
-          <ServiceCard cap={web} variant="light" className="lg:row-span-2" />
-          <ServiceCard cap={deep} variant="featured" className="lg:row-span-2" />
+          <ServiceCard cap={web} variant="light" siteLight={siteLight} className="lg:row-span-2" />
+          <ServiceCard cap={deep} variant="featured" siteLight={siteLight} className="lg:row-span-2" />
           <div className="relative min-h-[240px] overflow-hidden rounded-[28px] bg-black lg:min-h-[280px]">
             <Image
               src="/assets/services-orbs.jpg"
@@ -176,7 +181,7 @@ export default function ServicesShowcase() {
               className="object-cover"
             />
           </div>
-          <ServiceCard cap={mobile} variant="light" />
+          <ServiceCard cap={mobile} variant="light" siteLight={siteLight} />
         </div>
       </div>
     </section>

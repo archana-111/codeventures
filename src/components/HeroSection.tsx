@@ -1,0 +1,157 @@
+'use client';
+
+import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import {
+  ArrowUpRight,
+} from 'lucide-react';
+import gsap from 'gsap';
+
+interface HeroSectionProps {
+  onOpenApply?: () => void;
+}
+
+export default function HeroSection({ onOpenApply }: HeroSectionProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const bgImageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      // Subtle zoom and fade in for background image
+      if (bgImageRef.current) {
+        tl.fromTo(
+          bgImageRef.current,
+          { scale: 1.06, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 1.4, ease: 'power2.out' }
+        );
+      }
+
+      // Masked headline lines reveal
+      if (headlineRef.current) {
+        const lines = headlineRef.current.querySelectorAll('.hero-line-inner');
+        tl.fromTo(
+          lines,
+          { y: '110%', opacity: 0 },
+          { y: '0%', opacity: 1, duration: 0.9, stagger: 0.12 },
+          '-=0.8'
+        );
+      }
+
+      // Supporting copy
+      if (descRef.current) {
+        tl.fromTo(
+          descRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.7 },
+          '-=0.5'
+        );
+      }
+
+      // Modern CTA buttons
+      if (ctaRef.current) {
+        tl.fromTo(
+          ctaRef.current.children,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 },
+          '-=0.4'
+        );
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative min-h-screen w-full flex flex-col justify-end overflow-hidden bg-cv-page"
+    >
+      {/* 3D Geometric Background Image with High-Res Presentation */}
+      <div
+        ref={bgImageRef}
+        className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden"
+      >
+        <Image
+          src="/assets/hero-bg-teal.jpg"
+          alt="CodeVentures Geometric 3D Studio Environment"
+          fill
+          priority
+          quality={95}
+          className="object-cover object-center sm:object-right-top transform-gpu"
+        />
+
+        {/* Black overlay across the entire background image for optimal contrast and readability */}
+        <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+      </div>
+
+      {/* Main Hero Container: Clean Content Aligned to Left Bottom Corner */}
+      <div
+        ref={contentRef}
+        className="relative z-10 site-wrap w-full pb-16 sm:pb-20 lg:pb-24 pt-32 sm:pt-40"
+      >
+        <div className="max-w-3xl flex flex-col items-start text-left">
+          
+          {/* Main Headline: Bold text without gradient */}
+          <h1
+            ref={headlineRef}
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] font-bold text-white tracking-[-0.035em] leading-[1.04] mb-6 sm:mb-8"
+          >
+            <div className="overflow-hidden">
+              <span className="hero-line-inner block">
+                Great startups
+              </span>
+            </div>
+            <div className="overflow-hidden">
+              <span className="hero-line-inner block">
+                aren’t built alone.
+              </span>
+            </div>
+          </h1>
+
+          {/* Short Supporting Description */}
+          <p
+            ref={descRef}
+            className="text-base sm:text-lg lg:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl mb-8 sm:mb-10 text-left"
+          >
+            From your first idea to a scalable product, CodeVentures brings
+            the technical expertise, dedicated product squad, and strategic
+            guidance to help you build what’s next.
+          </p>
+
+          {/* Modern CTA Button Aligned on the Left Bottom Corner */}
+          <div
+            ref={ctaRef}
+            className="flex items-center gap-3.5 sm:gap-4 w-full sm:w-auto"
+          >
+            {/* Primary Modern CTA */}
+            <button
+              onClick={() => {
+                if (onOpenApply) onOpenApply();
+                else {
+                  const el = document.getElementById('apply');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent font-semibold text-sm tracking-wide transition-all duration-300 shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              <span>Build With Us</span>
+              <div className="w-5 h-5 rounded-full bg-cv-on-accent/15 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
+                <ArrowUpRight className="w-3.5 h-3.5 text-cv-on-accent" />
+              </div>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -6,12 +6,16 @@ import {
   ArrowUpRight,
 } from 'lucide-react';
 import gsap from 'gsap';
+import { useTheme } from '@/components/ThemeProvider';
 
 interface HeroSectionProps {
   onOpenApply?: () => void;
 }
 
 export default function HeroSection({ onOpenApply }: HeroSectionProps) {
+  const { theme, mounted } = useTheme();
+  const isLight = mounted && theme === 'light';
+
   const containerRef = useRef<HTMLDivElement>(null);
   const bgImageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -81,7 +85,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
         className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden"
       >
         <Image
-          src="/assets/hero-bg-teal.jpg"
+          src={isLight ? '/assets/hero-bg-light.jpg' : '/assets/hero-bg-teal.jpg'}
           alt="CodeVentures Geometric 3D Studio Environment"
           fill
           priority
@@ -89,8 +93,13 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
           className="object-cover object-center sm:object-right-top transform-gpu"
         />
 
-        {/* Black overlay across the entire background image for optimal contrast and readability */}
-        <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+        <div
+          className={`absolute inset-0 pointer-events-none ${
+            isLight
+              ? 'bg-gradient-to-t from-white/85 via-white/25 to-transparent'
+              : 'bg-black/60'
+          }`}
+        />
       </div>
 
       {/* Main Hero Container: Clean Content Aligned to Left Bottom Corner */}
@@ -103,7 +112,9 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
           {/* Main Headline: Bold text without gradient */}
           <h1
             ref={headlineRef}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] font-bold text-white tracking-[-0.035em] leading-[1.04] mb-6 sm:mb-8"
+            className={`text-4xl sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] font-bold tracking-[-0.035em] leading-[1.04] mb-6 sm:mb-8 ${
+              isLight ? 'text-neutral-950' : 'text-white'
+            }`}
           >
             <div className="overflow-hidden">
               <span className="hero-line-inner block">
@@ -120,7 +131,9 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
           {/* Short Supporting Description */}
           <p
             ref={descRef}
-            className="text-base sm:text-lg lg:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl mb-8 sm:mb-10 text-left"
+            className={`text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl mb-8 sm:mb-10 text-left ${
+              isLight ? 'text-neutral-700' : 'text-neutral-300'
+            }`}
           >
             From your first idea to a scalable product, CodeVentures brings
             the technical expertise, dedicated product squad, and strategic

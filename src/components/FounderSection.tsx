@@ -8,7 +8,7 @@ export default function FounderSection() {
   return (
     <section id="founder" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page border-t border-cv-border-subtle">
       <div className="site-wrap">
-        <div className="rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-8 sm:p-12 lg:p-16 mb-20">
+        <div className="cv-light-panel rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-8 sm:p-12 lg:p-16 mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5 flex flex-col items-center">
               <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full p-[3px] border border-[#00BFA5]/40">
@@ -87,7 +87,7 @@ export default function FounderSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {TESTIMONIALS.map((t) => (
-              <div key={t.author} className="rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-7 sm:p-8 flex flex-col justify-between">
+              <div key={t.author} className="cv-light-panel rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-7 sm:p-8 flex flex-col justify-between">
                 <p className="text-cv-fg-subtle text-base leading-relaxed mb-8 font-normal">
                   “{t.quote}”
                 </p>

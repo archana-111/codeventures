@@ -42,7 +42,7 @@ function PortfolioCard({
     <article
       className={`relative overflow-hidden rounded-[28px] ${
         light
-          ? 'border border-neutral-200/90 bg-white text-neutral-950 shadow-[0_12px_40px_rgba(15,23,42,0.08)]'
+          ? 'cv-surface-card text-cv-fg'
           : 'border border-white/[0.08] bg-[#0a0c10] text-white shadow-[0_24px_60px_rgba(0,0,0,0.45)]'
       } ${className}`}
     >
@@ -50,14 +50,14 @@ function PortfolioCard({
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background: portfolioGradientFor(seed),
-          opacity: light ? 0.55 : 1,
+          opacity: light ? 0.32 : 1,
         }}
         aria-hidden
       />
       <div
         className={`pointer-events-none absolute inset-0 z-0 ${
           light
-            ? 'bg-gradient-to-b from-white/30 via-white/70 to-white/95'
+            ? 'bg-gradient-to-b from-cv-card/20 via-cv-card/75 to-cv-card'
             : 'bg-gradient-to-b from-transparent via-[#0a0c10]/40 to-[#0a0c10]/90'
         }`}
         aria-hidden
@@ -129,7 +129,7 @@ export default function FeaturedPortfolio() {
                   <div className={`lg:col-span-6 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
                     <h3
                       className={`text-3xl sm:text-[34px] font-bold tracking-[-0.035em] leading-[1.08] mb-3 ${
-                        siteLight ? 'text-neutral-950' : 'text-white'
+                        siteLight ? 'text-cv-fg' : 'text-white'
                       }`}
                     >
                       {project.name}
@@ -137,14 +137,14 @@ export default function FeaturedPortfolio() {
 
                     <p
                       className={`text-base leading-relaxed mb-4 max-w-lg ${
-                        siteLight ? 'text-neutral-600' : 'text-white/75'
+                        siteLight ? 'text-cv-fg-subtle' : 'text-white/75'
                       }`}
                     >
                       {portfolioSummary(project)}
                     </p>
 
-                    <p className={`text-sm mb-5 ${siteLight ? 'text-neutral-500' : 'text-white/60'}`}>
-                      <span className={`font-semibold ${siteLight ? 'text-neutral-800' : 'text-white/90'}`}>
+                    <p className={`text-sm mb-5 ${siteLight ? 'text-cv-fg-muted' : 'text-white/60'}`}>
+                      <span className={`font-semibold ${siteLight ? 'text-cv-fg' : 'text-white/90'}`}>
                         Outcome ·{' '}
                       </span>
                       {project.impact}
@@ -156,7 +156,7 @@ export default function FeaturedPortfolio() {
                           key={tag}
                           className={`rounded-full px-3 py-1 text-xs ${
                             siteLight
-                              ? 'bg-neutral-100 text-neutral-700 ring-1 ring-neutral-200/80'
+                              ? 'bg-cv-elevated text-cv-fg-muted ring-1 ring-cv-border-subtle'
                               : 'bg-white/10 text-white/75'
                           }`}
                         >
@@ -170,7 +170,7 @@ export default function FeaturedPortfolio() {
                     <div
                       className={`relative rounded-[20px] overflow-hidden aspect-[16/10] ${
                         siteLight
-                          ? 'border border-neutral-200/90 bg-neutral-100'
+                          ? 'border border-cv-border bg-cv-elevated'
                           : 'border border-white/[0.08] bg-black/40'
                       }`}
                     >
@@ -196,7 +196,7 @@ export default function FeaturedPortfolio() {
                 <div
                   className={`relative rounded-[16px] overflow-hidden aspect-[16/11] mb-4 ${
                     siteLight
-                      ? 'border border-neutral-200/90 bg-neutral-100'
+                      ? 'border border-cv-border bg-cv-elevated'
                       : 'border border-white/[0.08] bg-black/40'
                   }`}
                 >
@@ -210,14 +210,14 @@ export default function FeaturedPortfolio() {
                 </div>
                 <h4
                   className={`text-xl font-bold tracking-[-0.03em] leading-[1.1] mb-2 ${
-                    siteLight ? 'text-neutral-950' : 'text-white'
+                    siteLight ? 'text-cv-fg' : 'text-white'
                   }`}
                 >
                   {project.name}
                 </h4>
                 <p
                   className={`text-sm leading-relaxed line-clamp-2 mb-3 ${
-                    siteLight ? 'text-neutral-600' : 'text-white/65'
+                    siteLight ? 'text-cv-fg-subtle' : 'text-white/65'
                   }`}
                 >
                   {portfolioSummary(project)}
@@ -228,7 +228,7 @@ export default function FeaturedPortfolio() {
                       key={tag}
                       className={`rounded-full px-2.5 py-0.5 text-[11px] ${
                         siteLight
-                          ? 'bg-neutral-100 text-neutral-700 ring-1 ring-neutral-200/80'
+                          ? 'bg-cv-elevated text-cv-fg-muted ring-1 ring-cv-border-subtle'
                           : 'bg-white/10 text-white/75'
                       }`}
                     >

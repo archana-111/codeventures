@@ -36,7 +36,7 @@ export default function Header({ onOpenApply }: HeaderProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-cv-page/85 backdrop-blur-xl border-b border-cv-border-subtle py-3.5 shadow-2xl shadow-black/20 dark:shadow-black/40'
+          ? 'bg-cv-page/85 backdrop-blur-xl border-b border-cv-border-subtle py-3.5 shadow-[var(--cv-header-shadow)] dark:shadow-2xl dark:shadow-black/40'
           : 'bg-transparent py-5 border-b border-cv-border-subtle/60'
       }`}
     >
@@ -80,7 +80,7 @@ export default function Header({ onOpenApply }: HeaderProps) {
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="group relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent font-semibold text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98]"
+              className="cv-btn-primary group relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent font-semibold text-sm tracking-wide transition-all duration-300 dark:hover:shadow-lg dark:hover:shadow-emerald-500/25 active:scale-[0.98]"
             >
               <span>Build With Us</span>
               <span className="w-5 h-5 rounded-full bg-cv-on-accent/15 flex items-center justify-center">

@@ -38,7 +38,7 @@ export default function FinalCTA({ preselectedModel }: FinalCTAProps) {
   };
 
   return (
-    <section id="apply" className="relative py-28 sm:py-36 lg:py-48 bg-cv-page border-t border-cv-border-subtle overflow-hidden">
+    <section id="apply" className="relative py-28 sm:py-36 lg:py-48 bg-cv-page-alt border-t border-cv-border-subtle overflow-hidden">
       <div className="site-wrap relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           <div className="lg:col-span-6">
@@ -76,7 +76,7 @@ export default function FinalCTA({ preselectedModel }: FinalCTAProps) {
           </div>
 
           <div className="lg:col-span-6">
-            <div className="rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-8 sm:p-10">
+            <div className="cv-light-panel rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-8 sm:p-10">
               {submitted ? (
                 <div className="py-12 text-center space-y-4">
                   <CheckCircle2 className="w-10 h-10 text-[#00BFA5] mx-auto mb-2" />
@@ -207,7 +207,7 @@ export default function FinalCTA({ preselectedModel }: FinalCTAProps) {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent font-semibold text-sm tracking-wide transition-all duration-300 shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 disabled:opacity-50"
+                    className="cv-btn-primary w-full group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent font-semibold text-sm tracking-wide transition-all duration-300 dark:shadow-xl dark:shadow-emerald-500/25 dark:hover:shadow-emerald-500/40 disabled:opacity-50"
                   >
                     {loading ? (
                       <Loader2 className="w-4 h-4 animate-spin" />

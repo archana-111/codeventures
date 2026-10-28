@@ -96,7 +96,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
         <div
           className={`absolute inset-0 pointer-events-none ${
             isLight
-              ? 'bg-gradient-to-t from-white/85 via-white/25 to-transparent'
+              ? 'bg-gradient-to-t from-cv-page via-cv-page/35 to-transparent'
               : 'bg-black/60'
           }`}
         />
@@ -113,7 +113,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
           <h1
             ref={headlineRef}
             className={`text-4xl sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] font-bold tracking-[-0.035em] leading-[1.04] mb-6 sm:mb-8 ${
-              isLight ? 'text-neutral-950' : 'text-white'
+              isLight ? 'text-cv-fg' : 'text-white'
             }`}
           >
             <div className="overflow-hidden">
@@ -132,7 +132,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
           <p
             ref={descRef}
             className={`text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl mb-8 sm:mb-10 text-left ${
-              isLight ? 'text-neutral-700' : 'text-neutral-300'
+              isLight ? 'text-cv-fg-subtle' : 'text-neutral-300'
             }`}
           >
             From your first idea to a scalable product, CodeVentures brings
@@ -154,7 +154,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent font-semibold text-sm tracking-wide transition-all duration-300 shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0"
+              className="cv-btn-primary group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent font-semibold text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
             >
               <span>Build With Us</span>
               <div className="w-5 h-5 rounded-full bg-cv-on-accent/15 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">

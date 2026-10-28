@@ -41,7 +41,7 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
   };
 
   return (
-    <section id="models" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page border-t border-cv-border-subtle">
+    <section id="models" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page-alt border-t border-cv-border-subtle">
       <div className="site-wrap">
         <div className="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold text-cv-fg tracking-[-0.035em] leading-[1.04] mb-5">
@@ -70,7 +70,7 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
                   featuredDark
                     ? 'text-white border border-[#00BFA5]/35 shadow-[0_24px_70px_rgba(0,191,165,0.22)]'
                     : featuredLight
-                      ? 'bg-white text-neutral-950 border border-[#00BFA5]/35 shadow-[0_16px_48px_rgba(0,191,165,0.18)]'
+                      ? 'cv-surface-card text-cv-fg border-emerald-500/30 ring-1 ring-emerald-500/12'
                       : 'bg-cv-elevated border border-cv-border-subtle text-cv-fg'
                 }`}
                 style={
@@ -79,12 +79,7 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
                         background:
                           'linear-gradient(180deg, #101614 0%, #0a2c28 36%, #00BFA5 118%)',
                       }
-                    : featuredLight
-                      ? {
-                          background:
-                            'linear-gradient(180deg, #ffffff 0%, #ecfbf8 42%, rgba(0,191,165,0.22) 118%)',
-                        }
-                      : undefined
+                    : undefined
                 }
               >
                 <div className="flex items-start justify-between gap-4 mb-2">
@@ -134,8 +129,8 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
                   onClick={() => openApply(plan.name)}
                   className={`mt-auto w-full inline-flex items-center justify-center gap-2 rounded-full py-3.5 px-6 text-sm font-semibold transition-all duration-300 ${
                     featured
-                      ? 'bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent shadow-[0_8px_28px_rgba(0,191,165,0.45)]'
-                      : 'bg-cv-nav hover:bg-cv-border-subtle text-cv-fg border border-cv-border-subtle'
+                      ? 'cv-btn-primary bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent dark:shadow-[0_8px_28px_rgba(0,191,165,0.45)]'
+                      : 'cv-btn-secondary bg-cv-nav hover:bg-cv-border-subtle text-cv-fg border border-cv-border-subtle'
                   }`}
                 >
                   <span>{plan.ctaLabel}</span>

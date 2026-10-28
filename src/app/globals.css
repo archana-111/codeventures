@@ -12,6 +12,7 @@
   --color-cv-on-accent: var(--cv-on-accent);
   --color-cv-nav: var(--cv-nav);
   --color-cv-input: var(--cv-input);
+  --color-cv-page-alt: var(--cv-page-alt);
 
   --color-emerald-50: #e0fbf7;
   --color-emerald-100: #b2f5ea;
@@ -40,31 +41,35 @@
 
 @layer base {
   :root {
-    --cv-page: #f3f4f7;
-    --cv-elevated: #ffffff;
-    --cv-card: #ffffff;
-    --cv-fg: #0a0c10;
-    --cv-fg-muted: #52525b;
-    --cv-fg-subtle: #71717a;
-    --cv-border: rgba(10, 12, 16, 0.12);
-    --cv-border-subtle: rgba(10, 12, 16, 0.08);
+    --cv-page: #e9ebf0;
+    --cv-page-alt: #e1e4ea;
+    --cv-elevated: #f3f4f8;
+    --cv-card: #fafbfc;
+    --cv-fg: #090b0f;
+    --cv-fg-muted: #4a5260;
+    --cv-fg-subtle: #5c6574;
+    --cv-border: rgba(9, 11, 15, 0.11);
+    --cv-border-subtle: rgba(9, 11, 15, 0.06);
     --cv-on-accent: #07080b;
-    --cv-nav: rgba(255, 255, 255, 0.72);
-    --cv-input: #ffffff;
-    --cv-scrollbar-track: #e4e4e7;
-    --cv-scrollbar-thumb: #cbd5e1;
-    --cv-scrollbar-thumb-hover: #94a3b8;
+    --cv-nav: rgba(243, 244, 248, 0.94);
+    --cv-input: #f6f7f9;
+    --cv-scrollbar-track: #dfe2e8;
+    --cv-scrollbar-thumb: #c5cad3;
+    --cv-scrollbar-thumb-hover: #a8b0bc;
     --cv-glass-bg: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.92) 0%,
-      rgba(255, 255, 255, 0.78) 100%
+      145deg,
+      rgba(250, 251, 252, 0.98) 0%,
+      rgba(243, 244, 248, 0.9) 100%
     );
-    --cv-glass-border: rgba(10, 12, 16, 0.08);
-    --cv-glass-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
-    --cv-advantage-bg: #ffffff;
-    --cv-advantage-fg: #0a0a0a;
-    --cv-advantage-muted: rgba(17, 17, 17, 0.62);
-    --cv-stat-divider: rgba(10, 12, 16, 0.12);
+    --cv-glass-border: rgba(9, 11, 15, 0.08);
+    --cv-glass-shadow: 0 1px 2px rgba(9, 11, 15, 0.04), 0 12px 32px rgba(9, 11, 15, 0.06);
+    --cv-advantage-bg: #eef0f4;
+    --cv-advantage-fg: #090b0f;
+    --cv-advantage-muted: rgba(9, 11, 15, 0.58);
+    --cv-stat-divider: rgba(9, 11, 15, 0.1);
+    --cv-shadow-card: 0 1px 2px rgba(9, 11, 15, 0.04), 0 8px 24px rgba(9, 11, 15, 0.06);
+    --cv-header-shadow: 0 8px 28px rgba(9, 11, 15, 0.06);
+    --cv-btn-shadow: 0 4px 14px rgba(0, 191, 165, 0.22);
 
     --background: var(--cv-page);
     --foreground: var(--cv-fg);
@@ -73,6 +78,7 @@
   }
 
   .dark {
+    --cv-page-alt: #07080b;
     --cv-page: #07080b;
     --cv-elevated: #0e1117;
     --cv-card: rgba(14, 17, 23, 0.92);
@@ -160,6 +166,30 @@ html.dark .header-brand-logo {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--cv-glass-border);
   box-shadow: var(--cv-glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.cv-surface-card {
+  background: var(--cv-card);
+  border: 1px solid var(--cv-border);
+}
+
+html:not(.dark) .cv-surface-card {
+  box-shadow: var(--cv-shadow-card);
+}
+
+.cv-kicker {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--accent-emerald);
+}
+
+.cv-btn-primary {
+  box-shadow: var(--cv-btn-shadow);
+}
+
+.cv-btn-primary:hover {
+  box-shadow: 0 6px 18px rgba(0, 191, 165, 0.28);
 }
 
 .glass-card-glow {
@@ -351,8 +381,8 @@ html.dark .header-brand-logo {
 .sst-bg-overlay--light {
   background: linear-gradient(
     to top,
-    rgba(255, 255, 255, 0.35) 0%,
-    rgba(255, 255, 255, 0.08) 55%,
+    rgba(233, 235, 240, 0.55) 0%,
+    rgba(233, 235, 240, 0.12) 52%,
     transparent 100%
   );
 }
@@ -419,15 +449,6 @@ html:not(.dark) .sst-bg.sst-bg {
   font-weight: 500;
   z-index: 6;
   overflow: hidden;
-}
-
-html:not(.dark) .sst-chip {
-  background: rgba(255, 255, 255, 0.94);
-  color: #0a0c10;
-  border: 1px solid rgba(10, 12, 16, 0.1);
-  box-shadow:
-    0 calc(18 * var(--u)) calc(42 * var(--u)) rgba(15, 23, 42, 0.1),
-    0 0 calc(20 * var(--u)) rgba(0, 191, 165, 0.12);
 }
 
 .sst-copy {
@@ -631,13 +652,6 @@ html:not(.dark) .sst-chip {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
 }
 
-html:not(.dark) .sst-m-chip {
-  background: rgba(255, 255, 255, 0.96);
-  color: #0a0c10;
-  border: 1px solid rgba(10, 12, 16, 0.1);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
-}
-
 .sst-m-art,
 .sst-m-mountain {
   position: absolute;
@@ -672,8 +686,8 @@ html:not(.dark) .sst-m-chip {
 .sst-m-overlay--light {
   background: linear-gradient(
     to top,
-    rgba(255, 255, 255, 0.4) 0%,
-    rgba(255, 255, 255, 0.1) 60%,
+    rgba(233, 235, 240, 0.5) 0%,
+    rgba(233, 235, 240, 0.14) 58%,
     transparent 100%
   );
 }
@@ -1117,5 +1131,63 @@ html:not(.dark) .sst-m-art.sst-m-art {
   .adv-why-item h4 {
     font-size: 24px;
   }
+}
+
+/* ==========================================================================
+   Light theme refinements (html:not(.dark) only — dark mode untouched)
+   ========================================================================== */
+
+html:not(.dark) .glass-card {
+  box-shadow: var(--cv-glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+html:not(.dark) .hero-stats {
+  background: var(--cv-page-alt);
+}
+
+html:not(.dark) .hstat-num {
+  color: var(--cv-fg);
+}
+
+html:not(.dark) .hstat-label {
+  color: var(--cv-fg-muted);
+}
+
+html:not(.dark) .sst-chip {
+  background: var(--cv-card);
+  color: var(--cv-fg);
+  border-color: var(--cv-border);
+  box-shadow: var(--cv-shadow-card);
+}
+
+html:not(.dark) .sst-m-chip {
+  background: var(--cv-card);
+  color: var(--cv-fg);
+  border-color: var(--cv-border);
+  box-shadow: 0 4px 12px rgba(9, 11, 15, 0.05);
+}
+
+html:not(.dark) .cv-btn-primary {
+  box-shadow: var(--cv-btn-shadow);
+}
+
+html:not(.dark) .cv-btn-primary:hover {
+  box-shadow: 0 6px 18px rgba(0, 191, 165, 0.28);
+}
+
+html:not(.dark) .cv-btn-secondary {
+  background: var(--cv-elevated);
+  border: 1px solid var(--cv-border);
+  color: var(--cv-fg);
+}
+
+html:not(.dark) .cv-btn-secondary:hover {
+  background: var(--cv-card);
+  border-color: rgba(9, 11, 15, 0.14);
+}
+
+html:not(.dark) .cv-light-panel {
+  background-color: var(--cv-card);
+  box-shadow: var(--cv-shadow-card);
 }
 

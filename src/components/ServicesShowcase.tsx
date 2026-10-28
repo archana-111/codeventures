@@ -25,7 +25,7 @@ function ServiceCard({
     <article
       className={`relative flex h-full min-h-0 flex-col overflow-hidden rounded-[28px] p-7 sm:p-8 lg:p-9 ${
         light
-          ? 'border border-neutral-200/90 bg-white text-neutral-950 shadow-[0_12px_40px_rgba(15,23,42,0.08)]'
+          ? 'cv-surface-card text-cv-fg'
           : 'bg-[#0a0c10] text-white border border-cv-border-subtle'
       } ${featured ? 'min-h-[560px]' : ''} ${className}`}
     >
@@ -40,7 +40,7 @@ function ServiceCard({
       )}
       {light && (
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-white via-white/82 to-white/20"
+          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-cv-card via-cv-card/88 to-cv-card/25"
           aria-hidden
         />
       )}
@@ -50,12 +50,17 @@ function ServiceCard({
           style={{
             background:
               'radial-gradient(ellipse 140% 90% at 50% -8%, #7ff5e0 0%, #00BFA5 28%, rgba(0,191,165,0.18) 52%, transparent 70%)',
+            opacity: light ? 0.42 : 1,
           }}
         />
       )}
 
       {featured && (
-        <p className="relative z-10 mb-auto text-[13px] font-medium text-white/60">
+        <p
+          className={`relative z-10 mb-auto text-[13px] font-medium ${
+            light ? 'text-cv-fg-muted' : 'text-white/60'
+          }`}
+        >
           {cap.number}
         </p>
       )}
@@ -73,7 +78,7 @@ function ServiceCard({
           {!featured && (
             <p
               className={`mb-5 text-[13px] font-medium ${
-                light ? 'text-neutral-500' : 'text-white/60'
+                light ? 'text-cv-fg-muted' : 'text-white/60'
               }`}
             >
               {cap.number}
@@ -82,7 +87,7 @@ function ServiceCard({
 
           <h3
             className={`text-[28px] font-bold leading-[1.08] tracking-[-0.035em] sm:text-[32px] lg:text-[36px] ${
-              light ? 'text-neutral-950' : 'text-white'
+              light ? 'text-cv-fg' : 'text-white'
             }`}
           >
             {cap.title}
@@ -90,7 +95,7 @@ function ServiceCard({
 
           <p
             className={`mt-4 text-[15px] font-medium leading-snug ${
-              light ? 'text-neutral-800' : 'text-white/85'
+              light ? 'text-cv-fg' : 'text-white/85'
             }`}
           >
             {cap.tagline}
@@ -99,7 +104,7 @@ function ServiceCard({
           <p
             className={`mt-3 text-sm leading-relaxed sm:text-[15px] ${
               wide ? 'max-w-xl' : 'max-w-md'
-            } ${light ? 'text-neutral-600' : 'text-white/65'}`}
+            } ${light ? 'text-cv-fg-subtle' : 'text-white/65'}`}
           >
             {cap.description}
           </p>
@@ -112,7 +117,7 @@ function ServiceCard({
                 key={item}
                 className={`flex items-start gap-2.5 text-sm leading-snug ${
                   wide ? 'break-inside-avoid mb-2.5' : ''
-                } ${light ? 'text-neutral-700' : 'text-white/75'}`}
+                } ${light ? 'text-cv-fg-subtle' : 'text-white/75'}`}
               >
                 <span
                   className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
@@ -130,7 +135,7 @@ function ServiceCard({
                 key={tag}
                 className={`rounded-full px-3 py-1 text-xs ${
                   light
-                    ? 'bg-neutral-100 text-neutral-700 ring-1 ring-neutral-200/80'
+                    ? 'bg-cv-elevated text-cv-fg-muted ring-1 ring-cv-border-subtle'
                     : 'bg-white/10 text-white/75'
                 }`}
               >
@@ -152,7 +157,7 @@ export default function ServicesShowcase() {
   return (
     <section
       id="services"
-      className="relative border-t border-cv-border-subtle bg-cv-page py-24 sm:py-32 lg:py-40"
+      className="relative border-t border-cv-border-subtle bg-cv-page-alt py-24 sm:py-32 lg:py-40"
     >
       <div className="site-wrap">
         <div className="mb-12 max-w-3xl lg:mb-16">
@@ -172,7 +177,11 @@ export default function ServicesShowcase() {
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
           <ServiceCard cap={web} variant="light" siteLight={siteLight} className="lg:row-span-2" />
           <ServiceCard cap={deep} variant="featured" siteLight={siteLight} className="lg:row-span-2" />
-          <div className="relative min-h-[240px] overflow-hidden rounded-[28px] bg-black lg:min-h-[280px]">
+          <div
+            className={`relative min-h-[240px] overflow-hidden rounded-[28px] lg:min-h-[280px] ${
+              siteLight ? 'cv-surface-card bg-cv-elevated' : 'bg-black'
+            }`}
+          >
             <Image
               src="/assets/services-orbs.jpg"
               alt=""

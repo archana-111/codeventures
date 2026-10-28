@@ -374,7 +374,7 @@ export default function ImpactMetrics() {
           <div className="sst-copy">
             <h2
               className={`sst-h2 text-4xl sm:text-5xl md:text-6xl lg:text-[64px] xl:text-[72px] font-bold tracking-[-0.035em] leading-[1.04] ${
-                isLight ? 'text-neutral-950' : 'text-white'
+                isLight ? 'text-cv-fg' : 'text-white'
               }`}
             >
               A studio of operators,
@@ -383,7 +383,7 @@ export default function ImpactMetrics() {
             </h2>
             <p
               className={`sst-sub text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl ${
-                isLight ? 'text-neutral-600' : 'text-neutral-300'
+                isLight ? 'text-cv-fg-subtle' : 'text-neutral-300'
               }`}
             >
               The Cheque is where most investors stop. It&apos;s where we start.
@@ -398,7 +398,7 @@ export default function ImpactMetrics() {
       <section className="studio sst-mobile" data-no-motion="true">
         <h2
           className={`sst-m-h2 text-4xl font-bold tracking-[-0.035em] leading-[1.04] ${
-            isLight ? 'text-neutral-950' : 'text-white'
+            isLight ? 'text-cv-fg' : 'text-white'
           }`}
         >
           A studio of operators,
@@ -407,7 +407,7 @@ export default function ImpactMetrics() {
         </h2>
         <p
           className={`sst-m-sub text-base font-normal leading-relaxed ${
-            isLight ? 'text-neutral-600' : 'text-neutral-300'
+            isLight ? 'text-cv-fg-subtle' : 'text-neutral-300'
           }`}
         >
           The Cheque is where most investors stop. It&apos;s where we start. We

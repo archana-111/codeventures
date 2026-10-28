@@ -36,9 +36,9 @@ export default function FounderSection() {
             </div>
 
             <div className="lg:col-span-7">
-              <p className="text-sm font-medium text-[#00BFA5] mb-5">Founder’s commitment</p>
+              <p className="cv-kicker mb-5">Founder’s commitment</p>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-cv-fg tracking-[-0.035em] leading-[1.04] mb-8">
+              <h2 className="cv-section-heading text-3xl sm:text-4xl lg:text-[54px] font-bold tracking-[-0.035em] leading-[1.04] mb-8">
                 “We’re not just an agency.
                 <br />
                 We are equity partners in your journey.”
@@ -79,8 +79,8 @@ export default function FounderSection() {
 
         <div>
           <div className="mb-10 max-w-2xl">
-            <p className="text-sm font-medium text-[#00BFA5] mb-4">Voices of confidence</p>
-            <h3 className="text-3xl sm:text-4xl font-bold text-cv-fg tracking-[-0.035em] leading-[1.04]">
+            <p className="cv-kicker mb-4">Voices of confidence</p>
+            <h3 className="cv-section-heading text-3xl sm:text-4xl font-bold tracking-[-0.035em] leading-[1.04]">
               What founders say about our work.
             </h3>
           </div>

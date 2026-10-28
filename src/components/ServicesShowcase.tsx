@@ -40,17 +40,17 @@ function ServiceCard({
       )}
       {light && (
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-cv-card via-cv-card/88 to-cv-card/25"
+          className="service-light-scrim pointer-events-none absolute inset-0 z-[1]"
           aria-hidden
         />
       )}
       {featured && (
         <div
-          className="pointer-events-none absolute inset-0"
+          className={`pointer-events-none absolute inset-0 ${light ? 'service-featured-glow' : ''}`}
           style={{
             background:
               'radial-gradient(ellipse 140% 90% at 50% -8%, #7ff5e0 0%, #00BFA5 28%, rgba(0,191,165,0.18) 52%, transparent 70%)',
-            opacity: light ? 0.42 : 1,
+            opacity: light ? undefined : 1,
           }}
         />
       )}
@@ -135,7 +135,7 @@ function ServiceCard({
                 key={tag}
                 className={`rounded-full px-3 py-1 text-xs ${
                   light
-                    ? 'bg-cv-elevated text-cv-fg-muted ring-1 ring-cv-border-subtle'
+                    ? 'cv-tag rounded-full px-3 py-1 text-xs'
                     : 'bg-white/10 text-white/75'
                 }`}
               >
@@ -161,13 +161,13 @@ export default function ServicesShowcase() {
     >
       <div className="site-wrap">
         <div className="mb-12 max-w-3xl lg:mb-16">
-          <p className="mb-5 text-sm font-medium text-[#00BFA5]">Why CodeVentures</p>
-          <h2 className="mb-6 text-4xl font-bold leading-[1.04] tracking-[-0.035em] text-cv-fg sm:text-5xl md:text-6xl lg:text-[64px]">
+          <p className="cv-kicker mb-5">Why CodeVentures</p>
+          <h2 className="cv-section-heading mb-6 text-4xl font-bold leading-[1.04] tracking-[-0.035em] sm:text-5xl md:text-6xl lg:text-[64px]">
             More than developers.
             <br />
             Your partners in building.
           </h2>
-          <p className="max-w-xl text-base font-normal leading-relaxed text-cv-fg-subtle sm:text-lg lg:text-xl">
+          <p className="cv-section-lead max-w-xl text-base font-normal sm:text-lg lg:text-xl">
             CodeVentures combines product engineering, startup strategy,
             technical leadership, and practical growth support to turn
             ambitious ideas into viable businesses.

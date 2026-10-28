@@ -126,9 +126,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
         >
           <p
             ref={kickerRef}
-            className={`hero-kicker mb-5 text-sm font-medium tracking-[0.02em] ${
-              isLight ? 'text-[#00BFA5]' : 'text-emerald-400'
-            }`}
+            className={`hero-kicker cv-kicker mb-5 ${isLight ? '' : 'text-emerald-400'}`}
           >
             Startup studio & technical co-founder
           </p>
@@ -177,7 +175,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
               href="#services"
               className={
                 isLight
-                  ? 'cv-btn-secondary inline-flex items-center justify-center rounded-full border border-cv-border bg-cv-card/80 px-7 py-4 text-sm font-semibold text-cv-fg transition-colors duration-300 hover:bg-cv-elevated'
+                  ? 'cv-btn-secondary inline-flex items-center justify-center rounded-full px-7 py-4 text-sm font-semibold transition-colors duration-300'
                   : 'inline-flex items-center justify-center rounded-full border border-white/18 bg-white/[0.04] px-7 py-4 text-sm font-semibold text-white/90 backdrop-blur-sm transition-colors duration-300 hover:bg-white/[0.08]'
               }
             >

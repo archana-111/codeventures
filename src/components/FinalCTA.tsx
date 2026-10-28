@@ -42,15 +42,15 @@ export default function FinalCTA({ preselectedModel }: FinalCTAProps) {
       <div className="site-wrap relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           <div className="lg:col-span-6">
-            <p className="text-sm font-medium text-[#00BFA5] mb-5">2026 cohort applications open</p>
+            <p className="cv-kicker mb-5">2026 cohort applications open</p>
 
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold text-cv-fg tracking-[-0.035em] leading-[1.04] mb-8">
+            <h2 className="cv-section-heading text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold tracking-[-0.035em] leading-[1.04] mb-8">
               Your next big idea deserves
               <br />
               the right team.
             </h2>
 
-            <p className="text-base sm:text-lg lg:text-xl text-cv-fg-subtle font-normal leading-relaxed mb-12 max-w-lg">
+            <p className="cv-section-lead text-base sm:text-lg lg:text-xl font-normal mb-12 max-w-lg">
               Let’s turn your vision into a product, and your product into a business.
               We evaluate applications on a rolling basis and respond within 1 business day.
             </p>

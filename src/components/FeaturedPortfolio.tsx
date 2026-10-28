@@ -42,22 +42,22 @@ function PortfolioCard({
     <article
       className={`relative overflow-hidden rounded-[28px] ${
         light
-          ? 'cv-surface-card text-cv-fg'
+          ? 'portfolio-card-light cv-surface-card text-cv-fg'
           : 'border border-white/[0.08] bg-[#0a0c10] text-white shadow-[0_24px_60px_rgba(0,0,0,0.45)]'
       } ${className}`}
     >
       <div
-        className="pointer-events-none absolute inset-0 z-0"
+        className={`pointer-events-none absolute inset-0 z-0 ${light ? 'portfolio-card-glow' : ''}`}
         style={{
           background: portfolioGradientFor(seed),
-          opacity: light ? 0.32 : 1,
+          opacity: light ? undefined : 1,
         }}
         aria-hidden
       />
       <div
         className={`pointer-events-none absolute inset-0 z-0 ${
           light
-            ? 'bg-gradient-to-b from-cv-card/20 via-cv-card/75 to-cv-card'
+            ? 'portfolio-card-veil'
             : 'bg-gradient-to-b from-transparent via-[#0a0c10]/40 to-[#0a0c10]/90'
         }`}
         aria-hidden
@@ -90,15 +90,15 @@ export default function FeaturedPortfolio() {
       <div className="site-wrap">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
           <div className="max-w-2xl">
-            <p className="text-sm font-medium text-[#00BFA5] mb-5">Startup portfolio</p>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold text-cv-fg tracking-[-0.035em] leading-[1.04]">
+            <p className="cv-kicker mb-5">Startup portfolio</p>
+            <h2 className="cv-section-heading text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold tracking-[-0.035em] leading-[1.04]">
               Real ideas. Real products.
               <br />
               Real progress.
             </h2>
           </div>
 
-          <p className="text-base sm:text-lg lg:text-xl text-cv-fg-subtle max-w-md leading-relaxed font-normal">
+          <p className="cv-section-lead text-base sm:text-lg lg:text-xl max-w-md font-normal">
             Early-stage ventures co-built with CodeVentures—from MVP to scale.
           </p>
         </div>
@@ -108,10 +108,10 @@ export default function FeaturedPortfolio() {
             <button
               key={filter}
               onClick={() => setSelectedFilter(filter)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+              className={`cv-filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                 selectedFilter === filter
-                  ? 'bg-emerald-500 text-cv-on-accent shadow-lg shadow-emerald-500/20'
-                  : 'bg-cv-nav text-cv-fg-muted hover:text-cv-fg border border-cv-border hover:bg-cv-border-subtle'
+                  ? 'is-active dark:bg-emerald-500 dark:text-cv-on-accent dark:shadow-lg dark:shadow-emerald-500/20'
+                  : 'dark:bg-cv-nav dark:text-cv-fg-muted dark:hover:text-cv-fg dark:border dark:border-cv-border dark:hover:bg-cv-border-subtle'
               }`}
             >
               {filter}
@@ -156,7 +156,7 @@ export default function FeaturedPortfolio() {
                           key={tag}
                           className={`rounded-full px-3 py-1 text-xs ${
                             siteLight
-                              ? 'bg-cv-elevated text-cv-fg-muted ring-1 ring-cv-border-subtle'
+                              ? 'cv-tag rounded-full px-3 py-1 text-xs'
                               : 'bg-white/10 text-white/75'
                           }`}
                         >
@@ -228,7 +228,7 @@ export default function FeaturedPortfolio() {
                       key={tag}
                       className={`rounded-full px-2.5 py-0.5 text-[11px] ${
                         siteLight
-                          ? 'bg-cv-elevated text-cv-fg-muted ring-1 ring-cv-border-subtle'
+                          ? 'cv-tag rounded-full px-2.5 py-0.5 text-[11px]'
                           : 'bg-white/10 text-white/75'
                       }`}
                     >

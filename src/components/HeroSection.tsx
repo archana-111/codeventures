@@ -2,7 +2,9 @@
 
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
+import {
+  ArrowUpRight,
+} from 'lucide-react';
 import gsap from 'gsap';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -11,13 +13,12 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ onOpenApply }: HeroSectionProps) {
-  const { theme, mounted } = useTheme();
-  const isLight = mounted && theme === 'light';
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   const containerRef = useRef<HTMLDivElement>(null);
   const bgImageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const kickerRef = useRef<HTMLParagraphElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -29,6 +30,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
+      // Subtle zoom and fade in for background image
       if (bgImageRef.current) {
         tl.fromTo(
           bgImageRef.current,
@@ -37,25 +39,18 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
         );
       }
 
-      if (kickerRef.current) {
-        tl.fromTo(
-          kickerRef.current,
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.55 },
-          '-=1'
-        );
-      }
-
+      // Masked headline lines reveal
       if (headlineRef.current) {
         const lines = headlineRef.current.querySelectorAll('.hero-line-inner');
         tl.fromTo(
           lines,
           { y: '110%', opacity: 0 },
           { y: '0%', opacity: 1, duration: 0.9, stagger: 0.12 },
-          '-=0.75'
+          '-=0.8'
         );
       }
 
+      // Supporting copy
       if (descRef.current) {
         tl.fromTo(
           descRef.current,
@@ -65,6 +60,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
         );
       }
 
+      // Modern CTA buttons
       if (ctaRef.current) {
         tl.fromTo(
           ctaRef.current.children,
@@ -78,23 +74,17 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
     return () => ctx.revert();
   }, []);
 
-  const openApply = () => {
-    if (onOpenApply) onOpenApply();
-    else document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section
       ref={containerRef}
-      className={`hero-section relative flex w-full flex-col overflow-hidden bg-cv-page ${
-        isLight
-          ? 'hero-section--light min-h-[100svh]'
-          : 'min-h-[100svh] justify-end lg:min-h-screen'
-      }`}
+      className="hero-section relative min-h-[100svh] w-full flex flex-col justify-end overflow-hidden bg-cv-page"
     >
+      {/* 3D Geometric Background Image with High-Res Presentation */}
       <div
         ref={bgImageRef}
-        className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden"
+        className={`absolute inset-0 z-0 pointer-events-none select-none overflow-hidden ${
+          isLight ? 'hero-bg-light' : ''
+        }`}
       >
         <Image
           src={isLight ? '/assets/hero-bg-light.jpg' : '/assets/hero-bg-teal.jpg'}
@@ -102,114 +92,89 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
           fill
           priority
           quality={95}
-          className={`transform-gpu object-cover ${
-            isLight
-              ? 'object-[58%_40%] sm:object-[68%_36%] lg:object-[92%_44%]'
-              : 'object-center sm:object-right-top'
+          className={`hero-bg-image object-cover transform-gpu ${
+            isLight ? '' : 'object-center sm:object-right-top'
           }`}
         />
 
         {isLight ? (
           <>
-            <div className="hero-light-scrim-side absolute inset-0" aria-hidden />
-            <div className="hero-light-scrim-base absolute inset-0" aria-hidden />
+            <div className="hero-scrim-side absolute inset-0" aria-hidden />
+            <div className="hero-scrim-bottom absolute inset-x-0 bottom-0 h-[min(52%,420px)]" aria-hidden />
           </>
         ) : (
-          <div className="absolute inset-0 bg-black/60" aria-hidden />
+          <div className="absolute inset-0 bg-black/60 pointer-events-none" aria-hidden />
         )}
       </div>
 
+      {/* Main Hero Container: Clean Content Aligned to Left Bottom Corner */}
       <div
         ref={contentRef}
-        className={`relative z-10 site-wrap w-full ${
-          isLight
-            ? 'py-28 sm:py-32 lg:py-24'
-            : 'pb-14 pt-28 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-40'
-        }`}
+        className="relative z-10 site-wrap w-full pb-[max(4rem,env(safe-area-inset-bottom))] sm:pb-20 lg:pb-[7.5rem] pt-28 sm:pt-36 lg:pt-40"
       >
-        <div className={isLight ? 'hero-light-grid' : 'max-w-3xl'}>
-          <div
-            className={
-              isLight
-                ? 'hero-light-copy-block flex flex-col items-start text-left'
-                : 'flex max-w-3xl flex-col items-start text-left'
-            }
+        <div className="hero-copy max-w-[40rem] flex flex-col items-start text-left">
+          <p
+            className={`cv-kicker mb-5 sm:mb-6 ${
+              isLight ? 'text-emerald-600' : 'text-emerald-400'
+            }`}
           >
-            <p
-              ref={kickerRef}
-              className={`mb-4 sm:mb-5 ${isLight ? 'cv-kicker hero-kicker' : 'text-sm font-medium text-emerald-400'}`}
-            >
-              Startup studio & technical co-founder
-            </p>
+            Startup studio · Technical co-founder
+          </p>
 
-            <h1
-              ref={headlineRef}
-              className={`text-balance mb-5 sm:mb-6 ${
-                isLight
-                  ? 'text-4xl sm:text-5xl lg:text-[4.25rem] xl:text-[4.75rem]'
-                  : 'text-4xl font-bold leading-[1.04] tracking-[-0.035em] sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] mb-5 sm:mb-7 text-white'
-              }`}
-            >
-              <div className="overflow-hidden">
-                <span
-                  className={`hero-line-inner block ${
-                    isLight ? 'hero-headline-primary text-cv-fg' : ''
-                  }`}
-                >
-                  Great startups
-                </span>
-              </div>
-              <div className="overflow-hidden">
-                <span
-                  className={`hero-line-inner block ${
-                    isLight ? 'hero-headline-secondary' : ''
-                  }`}
-                >
-                  aren&apos;t built alone.
-                </span>
-              </div>
-            </h1>
-
-            <p
-              ref={descRef}
-              className={`mb-8 max-w-md text-base font-normal leading-[1.65] sm:mb-9 sm:text-[1.0625rem] lg:max-w-lg ${
-                isLight ? 'text-cv-fg-muted' : 'max-w-xl sm:text-lg lg:text-xl text-neutral-300 mb-8 sm:mb-10'
-              }`}
-            >
-              From your first idea to a scalable product, CodeVentures brings the
-              technical expertise, dedicated product squad, and strategic guidance
-              to help you build what&apos;s next.
-            </p>
-
-            <div
-              ref={ctaRef}
-              className="flex w-full flex-col items-stretch gap-2.5 sm:w-auto sm:flex-row sm:items-center sm:gap-3"
-            >
-              <button
-                type="button"
-                onClick={openApply}
-                className={`cv-btn-primary group relative inline-flex items-center justify-center gap-2.5 bg-emerald-500 px-6 py-3.5 text-sm font-semibold text-cv-on-accent transition-all duration-300 hover:bg-emerald-400 active:translate-y-0 ${
-                  isLight ? 'rounded-[10px] hover:-translate-y-px' : 'rounded-full px-8 py-4 tracking-wide hover:-translate-y-0.5'
-                }`}
-              >
-                <span>Build With Us</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
-
-              <a
-                href="#services"
-                className={
-                  isLight
-                    ? 'cv-btn-secondary inline-flex items-center justify-center rounded-[10px] px-6 py-3.5 text-sm font-semibold transition-colors duration-300'
-                    : 'inline-flex items-center justify-center rounded-full border border-white/18 bg-white/[0.04] px-7 py-4 text-sm font-semibold text-white/90 backdrop-blur-sm transition-colors duration-300 hover:bg-white/[0.08]'
-                }
-              >
-                Why CodeVentures
-              </a>
+          {/* Main Headline: Bold text without gradient */}
+          <h1
+            ref={headlineRef}
+            className={`text-4xl sm:text-6xl md:text-7xl lg:text-[72px] xl:text-[80px] font-bold tracking-[-0.04em] leading-[1.02] mb-5 sm:mb-7 ${
+              isLight ? 'text-cv-fg' : 'text-white'
+            }`}
+          >
+            <div className="overflow-hidden">
+              <span className="hero-line-inner block">
+                Great startups
+              </span>
             </div>
+            <div className="overflow-hidden">
+              <span className="hero-line-inner block">
+                aren’t built alone.
+              </span>
+            </div>
+          </h1>
+
+          {/* Short Supporting Description */}
+          <p
+            ref={descRef}
+            className={`text-base sm:text-lg lg:text-[1.125rem] font-normal leading-[1.65] max-w-[34rem] mb-9 sm:mb-10 text-left ${
+              isLight ? 'text-cv-fg-muted' : 'text-neutral-300'
+            }`}
+          >
+            From your first idea to a scalable product, CodeVentures brings
+            the technical expertise, dedicated product squad, and strategic
+            guidance to help you build what’s next.
+          </p>
+
+          {/* Modern CTA Button Aligned on the Left Bottom Corner */}
+          <div
+            ref={ctaRef}
+            className="flex items-center gap-3.5 sm:gap-4 w-full sm:w-auto"
+          >
+            {/* Primary Modern CTA */}
+            <button
+              onClick={() => {
+                if (onOpenApply) onOpenApply();
+                else {
+                  const el = document.getElementById('apply');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="cv-btn-primary group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent font-semibold text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              <span>Build With Us</span>
+              <div className="w-5 h-5 rounded-full bg-cv-on-accent/15 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
+                <ArrowUpRight className="w-3.5 h-3.5 text-cv-on-accent" />
+              </div>
+            </button>
           </div>
 
-          {isLight && <div className="hero-light-visual-spacer" aria-hidden />}
         </div>
       </div>
     </section>

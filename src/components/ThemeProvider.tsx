@@ -22,6 +22,11 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
+function readThemeFromDocument(): Theme {
+  if (typeof document === 'undefined') return 'dark';
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+}
+
 function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle('dark', theme === 'dark');
   try {
@@ -32,7 +37,7 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('dark');
+  const [theme, setThemeState] = useState<Theme>(() => readThemeFromDocument());
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

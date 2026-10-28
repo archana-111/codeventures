@@ -10,13 +10,13 @@ export default function PartnerNetwork() {
     <section id="perks" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page-alt border-t border-cv-border-subtle">
       <div className="site-wrap">
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
-          <p className="cv-kicker mb-5">Founder ecosystem perks</p>
-          <h2 className="cv-section-heading text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold tracking-[-0.035em] leading-[1.04] mb-6">
+          <p className="text-sm font-medium text-[#00BFA5] mb-5">Founder ecosystem perks</p>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold text-cv-fg tracking-[-0.035em] leading-[1.04] mb-6">
             Over $100K+ in partner credits
             <br />
             & discounts.
           </h2>
-          <p className="cv-section-lead text-base sm:text-lg lg:text-xl font-normal max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-cv-fg-subtle font-normal leading-relaxed max-w-2xl mx-auto">
             Every startup that joins CodeVentures receives immediate, pre-negotiated credits
             and institutional discounts across our premier cloud, payment, and tool ecosystem.
           </p>

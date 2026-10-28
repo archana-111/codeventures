@@ -27,15 +27,15 @@ export default function FAQSection() {
       <div className="site-wrap">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           <div className="lg:col-span-5 lg:sticky lg:top-36 h-fit">
-            <p className="cv-kicker mb-5">Frequently asked questions</p>
+            <p className="text-sm font-medium text-[#00BFA5] mb-5">Frequently asked questions</p>
 
-            <h2 className="cv-section-heading text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold tracking-[-0.035em] leading-[1.04] mb-6">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold text-cv-fg tracking-[-0.035em] leading-[1.04] mb-6">
               Have questions?
               <br />
               We’ve got straight answers.
             </h2>
 
-            <p className="cv-section-lead text-base sm:text-lg lg:text-xl font-normal mb-8 max-w-xl">
+            <p className="text-base sm:text-lg lg:text-xl text-cv-fg-subtle font-normal leading-relaxed mb-8 max-w-xl">
               Everything you need to know about partnering with CodeVentures,
               our Discovery Workshop, equity terms, and post-launch support.
             </p>
@@ -53,10 +53,10 @@ export default function FAQSection() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`cv-filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     activeCategory === cat
-                      ? 'is-active dark:bg-emerald-500 dark:text-cv-on-accent'
-                      : 'dark:bg-cv-nav dark:text-cv-fg-muted dark:hover:text-cv-fg dark:border dark:border-cv-border'
+                      ? 'bg-emerald-500 text-cv-on-accent'
+                      : 'bg-cv-nav text-cv-fg-muted hover:text-cv-fg border border-cv-border'
                   }`}
                 >
                   {cat}
@@ -84,7 +84,7 @@ export default function FAQSection() {
                       <span className="text-lg sm:text-xl font-bold text-cv-fg group-hover:text-[#00BFA5] transition-colors leading-[1.2] tracking-[-0.03em]">
                         {faq.question}
                       </span>
-                      <span className="faq-toggle-icon w-8 h-8 rounded-full border flex items-center justify-center text-cv-fg-subtle group-hover:border-[#00BFA5]/50 group-hover:text-[#00BFA5] transition-all shrink-0 mt-0.5">
+                      <span className="w-8 h-8 rounded-full border border-cv-border flex items-center justify-center text-cv-fg-subtle group-hover:border-[#00BFA5]/50 group-hover:text-[#00BFA5] transition-all shrink-0 mt-0.5">
                         {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
                       </span>
                     </button>

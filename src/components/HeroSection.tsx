@@ -2,9 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import {
-  ArrowUpRight,
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -23,6 +21,11 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
   const descRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
+  const openApply = () => {
+    if (onOpenApply) onOpenApply();
+    else document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
@@ -30,7 +33,6 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      // Subtle zoom and fade in for background image
       if (bgImageRef.current) {
         tl.fromTo(
           bgImageRef.current,
@@ -39,7 +41,6 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
         );
       }
 
-      // Masked headline lines reveal
       if (headlineRef.current) {
         const lines = headlineRef.current.querySelectorAll('.hero-line-inner');
         tl.fromTo(
@@ -50,7 +51,6 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
         );
       }
 
-      // Supporting copy
       if (descRef.current) {
         tl.fromTo(
           descRef.current,
@@ -60,7 +60,6 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
         );
       }
 
-      // Modern CTA buttons
       if (ctaRef.current) {
         tl.fromTo(
           ctaRef.current.children,
@@ -74,100 +73,120 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
     return () => ctx.revert();
   }, []);
 
+  if (isLight) {
+    return (
+      <section
+        ref={containerRef}
+        className="hero-section hero--light relative w-full overflow-hidden"
+      >
+        <div className="hero-light-canvas absolute inset-0" aria-hidden>
+          <div className="hero-light-depth" />
+          <div ref={bgImageRef} className="hero-light-art-panel">
+            <Image
+              src="/assets/hero-bg-light.jpg"
+              alt=""
+              fill
+              priority
+              quality={95}
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              className="hero-light-art-img object-contain object-right"
+            />
+            <div className="hero-light-art-scrim" />
+          </div>
+        </div>
+
+        <div ref={contentRef} className="hero-light-shell site-wrap relative z-10">
+          <div className="hero-light-grid">
+            <div className="hero-copy hero-copy--editorial">
+              <p className="cv-kicker hero-light-kicker">Startup studio · Technical co-founder</p>
+
+              <h1 ref={headlineRef} className="hero-light-headline">
+                <span className="overflow-hidden block">
+                  <span className="hero-line-inner">Great startups</span>
+                </span>
+                <span className="overflow-hidden block">
+                  <span className="hero-line-inner">aren&apos;t built</span>
+                </span>
+                <span className="overflow-hidden block">
+                  <span className="hero-line-inner hero-line-accent">alone.</span>
+                </span>
+              </h1>
+
+              <p ref={descRef} className="hero-light-lede">
+                From your first idea to a scalable product, CodeVentures brings the technical
+                expertise, dedicated product squad, and strategic guidance to help you build
+                what&apos;s next.
+              </p>
+
+              <div ref={ctaRef} className="hero-light-cta">
+                <button type="button" onClick={openApply} className="hero-light-btn group">
+                  <span>Build With Us</span>
+                  <span className="hero-light-btn-icon" aria-hidden>
+                    <ArrowUpRight className="h-4 w-4" strokeWidth={2.25} />
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div className="hero-light-art-column" aria-hidden />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       ref={containerRef}
-      className={`hero-section relative min-h-[100svh] w-full flex flex-col justify-end overflow-hidden bg-cv-page ${
-        isLight ? 'hero--light' : ''
-      }`}
+      className="hero-section relative min-h-[100svh] w-full flex flex-col justify-end overflow-hidden bg-cv-page"
     >
-      {/* 3D Geometric Background Image with High-Res Presentation */}
       <div
         ref={bgImageRef}
-        className={`absolute inset-0 z-0 pointer-events-none select-none overflow-hidden ${
-          isLight ? 'hero-bg-light' : ''
-        }`}
+        className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden"
       >
         <Image
-          src={isLight ? '/assets/hero-bg-light.jpg' : '/assets/hero-bg-teal.jpg'}
+          src="/assets/hero-bg-teal.jpg"
           alt="CodeVentures Geometric 3D Studio Environment"
           fill
           priority
           quality={95}
-          className={`hero-bg-image object-cover transform-gpu ${
-            isLight ? '' : 'object-center sm:object-right-top'
-          }`}
+          className="hero-bg-image object-cover object-center sm:object-right-top transform-gpu"
         />
-
-        {isLight ? (
-          <>
-            <div className="hero-scrim-side absolute inset-0" aria-hidden />
-            <div className="hero-scrim-bottom absolute inset-x-0 bottom-0 h-[min(52%,420px)]" aria-hidden />
-          </>
-        ) : (
-          <div className="absolute inset-0 bg-black/60 pointer-events-none" aria-hidden />
-        )}
+        <div className="absolute inset-0 bg-black/60 pointer-events-none" aria-hidden />
       </div>
 
-      {/* Main Hero Container: Clean Content Aligned to Left Bottom Corner */}
       <div
         ref={contentRef}
-        className="hero-content-shell relative z-10 site-wrap w-full pb-[max(4rem,env(safe-area-inset-bottom))] sm:pb-20 lg:pb-[7.5rem] pt-28 sm:pt-36 lg:pt-40"
+        className="relative z-10 site-wrap w-full pb-[max(4rem,env(safe-area-inset-bottom))] sm:pb-20 lg:pb-[7.5rem] pt-28 sm:pt-36 lg:pt-40"
       >
         <div className="hero-copy max-w-[40rem] flex flex-col items-start text-left">
-          <p
-            className={`cv-kicker mb-5 sm:mb-6 ${
-              isLight ? 'text-emerald-600' : 'text-emerald-400'
-            }`}
-          >
-            Startup studio · Technical co-founder
-          </p>
+          <p className="cv-kicker mb-5 sm:mb-6 text-emerald-400">Startup studio · Technical co-founder</p>
 
-          {/* Main Headline: Bold text without gradient */}
           <h1
             ref={headlineRef}
-            className={`text-4xl sm:text-6xl md:text-7xl lg:text-[72px] xl:text-[80px] font-bold tracking-[-0.04em] leading-[1.02] mb-5 sm:mb-7 ${
-              isLight ? 'text-cv-fg' : 'text-white'
-            }`}
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-[72px] xl:text-[80px] font-bold tracking-[-0.04em] leading-[1.02] mb-5 sm:mb-7 text-white"
           >
             <div className="overflow-hidden">
-              <span className="hero-line-inner block">
-                Great startups
-              </span>
+              <span className="hero-line-inner block">Great startups</span>
             </div>
             <div className="overflow-hidden">
-              <span className="hero-line-inner block">
-                aren’t built alone.
-              </span>
+              <span className="hero-line-inner block">aren&apos;t built alone.</span>
             </div>
           </h1>
 
-          {/* Short Supporting Description */}
           <p
             ref={descRef}
-            className={`text-base sm:text-lg lg:text-[1.125rem] font-normal leading-[1.65] max-w-[34rem] mb-9 sm:mb-10 text-left ${
-              isLight ? 'text-cv-fg-muted' : 'text-neutral-300'
-            }`}
+            className="text-base sm:text-lg lg:text-[1.125rem] font-normal leading-[1.65] max-w-[34rem] mb-9 sm:mb-10 text-left text-neutral-300"
           >
-            From your first idea to a scalable product, CodeVentures brings
-            the technical expertise, dedicated product squad, and strategic
-            guidance to help you build what’s next.
+            From your first idea to a scalable product, CodeVentures brings the technical
+            expertise, dedicated product squad, and strategic guidance to help you build
+            what&apos;s next.
           </p>
 
-          {/* Modern CTA Button Aligned on the Left Bottom Corner */}
-          <div
-            ref={ctaRef}
-            className="flex items-center gap-3.5 sm:gap-4 w-full sm:w-auto"
-          >
-            {/* Primary Modern CTA */}
+          <div ref={ctaRef} className="flex items-center gap-3.5 sm:gap-4 w-full sm:w-auto">
             <button
-              onClick={() => {
-                if (onOpenApply) onOpenApply();
-                else {
-                  const el = document.getElementById('apply');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+              type="button"
+              onClick={openApply}
               className="cv-btn-primary group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-cv-on-accent font-semibold text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
             >
               <span>Build With Us</span>
@@ -176,7 +195,6 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
               </div>
             </button>
           </div>
-
         </div>
       </div>
     </section>

@@ -27,49 +27,104 @@ function portfolioGradientFor(id: string) {
   return PORTFOLIO_GRADIENTS[hashSeed(id) % PORTFOLIO_GRADIENTS.length];
 }
 
-function PortfolioCard({
+function portfolioSummary(project: PortfolioProject) {
+  const firstSentence = project.description.split(/(?<=[.!?])\s+/)[0] ?? project.description;
+  return firstSentence.length > 140 ? `${firstSentence.slice(0, 137).trim()}…` : firstSentence;
+}
+
+function PortfolioDarkCard({
   children,
   className = '',
   seed,
-  light,
 }: {
   children: React.ReactNode;
   className?: string;
   seed: string;
-  light: boolean;
 }) {
   return (
     <article
-      className={`relative overflow-hidden rounded-[28px] ${
-        light
-          ? 'portfolio-card-light cv-surface-card text-cv-fg'
-          : 'border border-white/[0.08] bg-[#0a0c10] text-white shadow-[0_24px_60px_rgba(0,0,0,0.45)]'
-      } ${className}`}
+      className={`relative overflow-hidden rounded-[28px] border border-white/[0.08] bg-[#0a0c10] text-white shadow-[0_24px_60px_rgba(0,0,0,0.45)] ${className}`}
     >
       <div
-        className={`pointer-events-none absolute inset-0 z-0 ${light ? 'portfolio-card-glow' : ''}`}
-        style={{
-          background: portfolioGradientFor(seed),
-          opacity: light ? undefined : 1,
-        }}
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{ background: portfolioGradientFor(seed) }}
         aria-hidden
       />
       <div
-        className={`pointer-events-none absolute inset-0 z-0 ${
-          light
-            ? 'portfolio-card-veil'
-            : 'bg-gradient-to-b from-transparent via-[#0a0c10]/40 to-[#0a0c10]/90'
-        }`}
+        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-transparent via-[#0a0c10]/40 to-[#0a0c10]/90"
         aria-hidden
       />
-      <div className="relative z-[1] h-full flex flex-col">{children}</div>
+      <div className="relative z-[1] flex h-full flex-col">{children}</div>
     </article>
   );
 }
 
-function portfolioSummary(project: PortfolioProject) {
-  const firstSentence = project.description.split(/(?<=[.!?])\s+/)[0] ?? project.description;
-  return firstSentence.length > 140 ? `${firstSentence.slice(0, 137).trim()}…` : firstSentence;
+function PortfolioLightFeature({ project }: { project: PortfolioProject }) {
+  return (
+    <article className="portfolio-light-feature group">
+      <div className="portfolio-light-media relative mb-6 aspect-[16/10] lg:mb-8 lg:aspect-[2/1]">
+        <Image
+          src={project.image}
+          alt={project.name}
+          fill
+          sizes="(max-width: 1024px) 100vw, 80vw"
+          className="object-cover"
+        />
+      </div>
+
+      <div className="grid gap-5 lg:grid-cols-12 lg:gap-x-10 lg:gap-y-4">
+        <div className="lg:col-span-4">
+          <p className="cv-kicker mb-2 !text-[0.6875rem]">{project.sector}</p>
+          <h3 className="text-2xl font-semibold tracking-[-0.032em] text-cv-fg sm:text-[1.75rem] lg:text-[1.875rem]">
+            {project.name}
+          </h3>
+        </div>
+        <div className="lg:col-span-5">
+          <p className="text-base leading-relaxed text-cv-fg-muted">{portfolioSummary(project)}</p>
+          <p className="mt-4 text-sm text-cv-fg-subtle">
+            <span className="font-semibold text-cv-fg">Outcome · </span>
+            {project.impact}
+          </p>
+        </div>
+        <div className="flex flex-wrap content-start gap-1.5 lg:col-span-3">
+          {project.tags.slice(0, 4).map((tag) => (
+            <span key={tag} className="cv-tag rounded-md px-2.5 py-1 text-xs">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function PortfolioLightCompact({ project }: { project: PortfolioProject }) {
+  return (
+    <article className="portfolio-light-compact group flex h-full flex-col">
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-cv-border-subtle">
+        <Image
+          src={project.image}
+          alt={project.name}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <h4 className="text-lg font-semibold tracking-[-0.028em] text-cv-fg">{project.name}</h4>
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-cv-fg-muted">
+          {portfolioSummary(project)}
+        </p>
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
+          {project.tags.slice(0, 2).map((tag) => (
+            <span key={tag} className="cv-tag rounded-md px-2 py-0.5 text-[11px]">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
 }
 
 export default function FeaturedPortfolio() {
@@ -86,32 +141,50 @@ export default function FeaturedPortfolio() {
   const secondaryProjects = filteredProjects.slice(4);
 
   return (
-    <section id="portfolio" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page border-t border-cv-border-subtle">
+    <section id="portfolio" className="relative border-t border-cv-border-subtle bg-cv-page py-20 sm:py-28 lg:py-32">
       <div className="site-wrap">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
+        <div className={siteLight ? 'section-light-split' : 'mb-14 flex flex-col justify-between gap-8 lg:flex-row lg:items-end'}>
           <div className="max-w-2xl">
-            <p className="cv-kicker mb-5">Startup portfolio</p>
-            <h2 className="cv-section-heading text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold tracking-[-0.035em] leading-[1.04]">
+            <p className={siteLight ? 'cv-kicker mb-4' : 'mb-5 text-sm font-medium text-[#00BFA5]'}>
+              Startup portfolio
+            </p>
+            <h2
+              className={
+                siteLight
+                  ? 'cv-section-heading text-3xl sm:text-4xl lg:text-[3.25rem]'
+                  : 'text-4xl font-bold leading-[1.04] tracking-[-0.035em] text-cv-fg sm:text-5xl md:text-6xl lg:text-[64px]'
+              }
+            >
               Real ideas. Real products.
               <br />
               Real progress.
             </h2>
           </div>
-
-          <p className="cv-section-lead text-base sm:text-lg lg:text-xl max-w-md font-normal">
+          <p
+            className={
+              siteLight
+                ? 'cv-section-lead max-w-sm lg:pb-1'
+                : 'max-w-md text-base font-normal leading-relaxed text-cv-fg-subtle sm:text-lg lg:text-xl'
+            }
+          >
             Early-stage ventures co-built with CodeVentures—from MVP to scale.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5 mb-14">
+        <div className="mb-10 flex flex-wrap items-center gap-2 sm:mb-12">
           {(['All', 'SaaS', 'Deep Tech', 'Mobile', 'Marketplace'] as const).map((filter) => (
             <button
               key={filter}
+              type="button"
               onClick={() => setSelectedFilter(filter)}
-              className={`cv-filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+              className={`cv-filter-btn px-4 py-2 text-sm font-medium transition-all duration-200 sm:px-5 sm:py-2.5 ${
                 selectedFilter === filter
-                  ? 'is-active dark:bg-emerald-500 dark:text-cv-on-accent dark:shadow-lg dark:shadow-emerald-500/20'
-                  : 'dark:bg-cv-nav dark:text-cv-fg-muted dark:hover:text-cv-fg dark:border dark:border-cv-border dark:hover:bg-cv-border-subtle'
+                  ? siteLight
+                    ? 'is-active'
+                    : 'bg-emerald-500 text-cv-on-accent shadow-lg shadow-emerald-500/20'
+                  : siteLight
+                    ? ''
+                    : 'border border-cv-border bg-cv-nav text-cv-fg-muted hover:bg-cv-border-subtle hover:text-cv-fg'
               }`}
             >
               {filter}
@@ -119,126 +192,95 @@ export default function FeaturedPortfolio() {
           ))}
         </div>
 
-        <div className="space-y-5 sm:space-y-6 mb-16">
-          {spotlightProjects.map((project, index) => {
-            const isReversed = index % 2 === 1;
-
-            return (
-              <PortfolioCard key={project.id} seed={project.id} light={siteLight} className="p-6 sm:p-8 lg:p-9">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-                  <div className={`lg:col-span-6 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <h3
-                      className={`text-3xl sm:text-[34px] font-bold tracking-[-0.035em] leading-[1.08] mb-3 ${
-                        siteLight ? 'text-cv-fg' : 'text-white'
-                      }`}
-                    >
-                      {project.name}
-                    </h3>
-
-                    <p
-                      className={`text-base leading-relaxed mb-4 max-w-lg ${
-                        siteLight ? 'text-cv-fg-subtle' : 'text-white/75'
-                      }`}
-                    >
-                      {portfolioSummary(project)}
-                    </p>
-
-                    <p className={`text-sm mb-5 ${siteLight ? 'text-cv-fg-muted' : 'text-white/60'}`}>
-                      <span className={`font-semibold ${siteLight ? 'text-cv-fg' : 'text-white/90'}`}>
-                        Outcome ·{' '}
-                      </span>
-                      {project.impact}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.slice(0, 4).map((tag) => (
-                        <span
-                          key={tag}
-                          className={`rounded-full px-3 py-1 text-xs ${
-                            siteLight
-                              ? 'cv-tag rounded-full px-3 py-1 text-xs'
-                              : 'bg-white/10 text-white/75'
-                          }`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
+        {siteLight ? (
+          <>
+            <div className="mb-12 sm:mb-16">
+              {spotlightProjects.map((project) => (
+                <PortfolioLightFeature key={project.id} project={project} />
+              ))}
+            </div>
+            {secondaryProjects.length > 0 && (
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:gap-6">
+                {secondaryProjects.map((project) => (
+                  <PortfolioLightCompact key={project.id} project={project} />
+                ))}
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            <div className="mb-16 space-y-5 sm:space-y-6">
+              {spotlightProjects.map((project, index) => {
+                const isReversed = index % 2 === 1;
+                return (
+                  <PortfolioDarkCard key={project.id} seed={project.id} className="p-6 sm:p-8 lg:p-9">
+                    <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
+                      <div className={`lg:col-span-6 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
+                        <h3 className="mb-3 text-3xl font-bold leading-[1.08] tracking-[-0.035em] text-white sm:text-[34px]">
+                          {project.name}
+                        </h3>
+                        <p className="mb-4 max-w-lg text-base leading-relaxed text-white/75">
+                          {portfolioSummary(project)}
+                        </p>
+                        <p className="mb-5 text-sm text-white/60">
+                          <span className="font-semibold text-white/90">Outcome · </span>
+                          {project.impact}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags.slice(0, 4).map((tag) => (
+                            <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/75">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className={`lg:col-span-6 ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}>
+                        <div className="relative aspect-[16/10] overflow-hidden rounded-[20px] border border-white/[0.08] bg-black/40">
+                          <Image
+                            src={project.image}
+                            alt={project.name}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            className="object-cover"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className={`lg:col-span-6 ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}>
-                    <div
-                      className={`relative rounded-[20px] overflow-hidden aspect-[16/10] ${
-                        siteLight
-                          ? 'border border-cv-border bg-cv-elevated'
-                          : 'border border-white/[0.08] bg-black/40'
-                      }`}
-                    >
+                  </PortfolioDarkCard>
+                );
+              })}
+            </div>
+            {secondaryProjects.length > 0 && (
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {secondaryProjects.map((project) => (
+                  <PortfolioDarkCard key={project.id} seed={project.id} className="flex flex-col p-5">
+                    <div className="relative mb-4 aspect-[16/11] overflow-hidden rounded-[16px] border border-white/[0.08] bg-black/40">
                       <Image
                         src={project.image}
                         alt={project.name}
                         fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        sizes="(max-width: 768px) 100vw, 25vw"
                         className="object-cover"
                       />
                     </div>
-                  </div>
-                </div>
-              </PortfolioCard>
-            );
-          })}
-        </div>
-
-        {secondaryProjects.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {secondaryProjects.map((project: PortfolioProject) => (
-              <PortfolioCard key={project.id} seed={project.id} light={siteLight} className="flex flex-col p-5">
-                <div
-                  className={`relative rounded-[16px] overflow-hidden aspect-[16/11] mb-4 ${
-                    siteLight
-                      ? 'border border-cv-border bg-cv-elevated'
-                      : 'border border-white/[0.08] bg-black/40'
-                  }`}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 25vw"
-                    className="object-cover"
-                  />
-                </div>
-                <h4
-                  className={`text-xl font-bold tracking-[-0.03em] leading-[1.1] mb-2 ${
-                    siteLight ? 'text-cv-fg' : 'text-white'
-                  }`}
-                >
-                  {project.name}
-                </h4>
-                <p
-                  className={`text-sm leading-relaxed line-clamp-2 mb-3 ${
-                    siteLight ? 'text-cv-fg-subtle' : 'text-white/65'
-                  }`}
-                >
-                  {portfolioSummary(project)}
-                </p>
-                <div className="mt-auto flex flex-wrap gap-1.5">
-                  {project.tags.slice(0, 2).map((tag) => (
-                    <span
-                      key={tag}
-                      className={`rounded-full px-2.5 py-0.5 text-[11px] ${
-                        siteLight
-                          ? 'cv-tag rounded-full px-2.5 py-0.5 text-[11px]'
-                          : 'bg-white/10 text-white/75'
-                      }`}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </PortfolioCard>
-            ))}
-          </div>
+                    <h4 className="mb-2 text-xl font-bold leading-[1.1] tracking-[-0.03em] text-white">
+                      {project.name}
+                    </h4>
+                    <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-white/65">
+                      {portfolioSummary(project)}
+                    </p>
+                    <div className="mt-auto flex flex-wrap gap-1.5">
+                      {project.tags.slice(0, 2).map((tag) => (
+                        <span key={tag} className="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] text-white/75">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </PortfolioDarkCard>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>

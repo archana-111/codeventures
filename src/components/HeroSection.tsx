@@ -86,7 +86,11 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
   return (
     <section
       ref={containerRef}
-      className="hero-section relative flex min-h-[100svh] w-full flex-col justify-end overflow-hidden bg-cv-page lg:min-h-screen"
+      className={`hero-section relative flex w-full flex-col overflow-hidden bg-cv-page ${
+        isLight
+          ? 'hero-section--light min-h-[100svh]'
+          : 'min-h-[100svh] justify-end lg:min-h-screen'
+      }`}
     >
       <div
         ref={bgImageRef}
@@ -100,7 +104,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
           quality={95}
           className={`transform-gpu object-cover ${
             isLight
-              ? 'object-[62%_42%] sm:object-[72%_38%] lg:object-right lg:object-[88%_42%]'
+              ? 'object-[58%_40%] sm:object-[68%_36%] lg:object-[92%_44%]'
               : 'object-center sm:object-right-top'
           }`}
         />
@@ -117,71 +121,95 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
 
       <div
         ref={contentRef}
-        className="relative z-10 site-wrap w-full pb-14 pt-28 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-40"
+        className={`relative z-10 site-wrap w-full ${
+          isLight
+            ? 'py-28 sm:py-32 lg:py-24'
+            : 'pb-14 pt-28 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-40'
+        }`}
       >
-        <div
-          className={`hero-light-copy flex max-w-3xl flex-col items-start text-left ${
-            isLight ? '' : 'max-w-3xl'
-          }`}
-        >
-          <p
-            ref={kickerRef}
-            className={`hero-kicker cv-kicker mb-5 ${isLight ? '' : 'text-emerald-400'}`}
-          >
-            Startup studio & technical co-founder
-          </p>
-
-          <h1
-            ref={headlineRef}
-            className={`text-balance text-4xl font-bold leading-[1.04] tracking-[-0.035em] sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] mb-5 sm:mb-7 ${
-              isLight ? 'text-cv-fg' : 'text-white'
-            }`}
-          >
-            <div className="overflow-hidden">
-              <span className="hero-line-inner block">Great startups</span>
-            </div>
-            <div className="overflow-hidden">
-              <span className="hero-line-inner block">aren&apos;t built alone.</span>
-            </div>
-          </h1>
-
-          <p
-            ref={descRef}
-            className={`mb-8 max-w-xl text-base font-normal leading-relaxed sm:mb-10 sm:text-lg lg:text-xl ${
-              isLight ? 'text-cv-fg-muted' : 'text-neutral-300'
-            }`}
-          >
-            From your first idea to a scalable product, CodeVentures brings the
-            technical expertise, dedicated product squad, and strategic guidance
-            to help you build what&apos;s next.
-          </p>
-
+        <div className={isLight ? 'hero-light-grid' : 'max-w-3xl'}>
           <div
-            ref={ctaRef}
-            className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-3.5"
+            className={
+              isLight
+                ? 'hero-light-copy-block flex flex-col items-start text-left'
+                : 'flex max-w-3xl flex-col items-start text-left'
+            }
           >
-            <button
-              type="button"
-              onClick={openApply}
-              className="cv-btn-primary group relative inline-flex items-center justify-center gap-3 rounded-full bg-emerald-500 px-8 py-4 text-sm font-semibold tracking-wide text-cv-on-accent transition-all duration-300 hover:bg-emerald-400 hover:-translate-y-0.5 active:translate-y-0"
+            <p
+              ref={kickerRef}
+              className={`mb-4 sm:mb-5 ${isLight ? 'cv-kicker hero-kicker' : 'text-sm font-medium text-emerald-400'}`}
             >
-              <span>Build With Us</span>
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-cv-on-accent/15 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
-                <ArrowUpRight className="h-3.5 w-3.5 text-cv-on-accent" />
-              </div>
-            </button>
+              Startup studio & technical co-founder
+            </p>
 
-            <a
-              href="#services"
-              className={
+            <h1
+              ref={headlineRef}
+              className={`text-balance mb-5 sm:mb-6 ${
                 isLight
-                  ? 'cv-btn-secondary inline-flex items-center justify-center rounded-full px-7 py-4 text-sm font-semibold transition-colors duration-300'
-                  : 'inline-flex items-center justify-center rounded-full border border-white/18 bg-white/[0.04] px-7 py-4 text-sm font-semibold text-white/90 backdrop-blur-sm transition-colors duration-300 hover:bg-white/[0.08]'
-              }
+                  ? 'text-4xl sm:text-5xl lg:text-[4.25rem] xl:text-[4.75rem]'
+                  : 'text-4xl font-bold leading-[1.04] tracking-[-0.035em] sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] mb-5 sm:mb-7 text-white'
+              }`}
             >
-              Why CodeVentures
-            </a>
+              <div className="overflow-hidden">
+                <span
+                  className={`hero-line-inner block ${
+                    isLight ? 'hero-headline-primary text-cv-fg' : ''
+                  }`}
+                >
+                  Great startups
+                </span>
+              </div>
+              <div className="overflow-hidden">
+                <span
+                  className={`hero-line-inner block ${
+                    isLight ? 'hero-headline-secondary' : ''
+                  }`}
+                >
+                  aren&apos;t built alone.
+                </span>
+              </div>
+            </h1>
+
+            <p
+              ref={descRef}
+              className={`mb-8 max-w-md text-base font-normal leading-[1.65] sm:mb-9 sm:text-[1.0625rem] lg:max-w-lg ${
+                isLight ? 'text-cv-fg-muted' : 'max-w-xl sm:text-lg lg:text-xl text-neutral-300 mb-8 sm:mb-10'
+              }`}
+            >
+              From your first idea to a scalable product, CodeVentures brings the
+              technical expertise, dedicated product squad, and strategic guidance
+              to help you build what&apos;s next.
+            </p>
+
+            <div
+              ref={ctaRef}
+              className="flex w-full flex-col items-stretch gap-2.5 sm:w-auto sm:flex-row sm:items-center sm:gap-3"
+            >
+              <button
+                type="button"
+                onClick={openApply}
+                className={`cv-btn-primary group relative inline-flex items-center justify-center gap-2.5 bg-emerald-500 px-6 py-3.5 text-sm font-semibold text-cv-on-accent transition-all duration-300 hover:bg-emerald-400 active:translate-y-0 ${
+                  isLight ? 'rounded-[10px] hover:-translate-y-px' : 'rounded-full px-8 py-4 tracking-wide hover:-translate-y-0.5'
+                }`}
+              >
+                <span>Build With Us</span>
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </button>
+
+              <a
+                href="#services"
+                className={
+                  isLight
+                    ? 'cv-btn-secondary inline-flex items-center justify-center rounded-[10px] px-6 py-3.5 text-sm font-semibold transition-colors duration-300'
+                    : 'inline-flex items-center justify-center rounded-full border border-white/18 bg-white/[0.04] px-7 py-4 text-sm font-semibold text-white/90 backdrop-blur-sm transition-colors duration-300 hover:bg-white/[0.08]'
+                }
+              >
+                Why CodeVentures
+              </a>
+            </div>
           </div>
+
+          {isLight && <div className="hero-light-visual-spacer" aria-hidden />}
         </div>
       </div>
     </section>

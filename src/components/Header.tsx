@@ -56,7 +56,7 @@ export default function Header({ onOpenApply }: HeaderProps) {
           />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1 bg-cv-nav border border-cv-border-subtle rounded-full px-4 py-1.5 backdrop-blur-md">
+        <nav className="header-nav-pill hidden lg:flex items-center gap-0.5 bg-cv-nav border border-cv-border-subtle rounded-full backdrop-blur-md">
           {navLinks.map((item) => (
             <a
               key={item.label}

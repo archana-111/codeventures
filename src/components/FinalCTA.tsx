@@ -38,7 +38,7 @@ export default function FinalCTA({ preselectedModel }: FinalCTAProps) {
   };
 
   return (
-    <section id="apply" className="relative py-28 sm:py-36 lg:py-48 bg-cv-page-alt border-t border-cv-border-subtle overflow-hidden">
+    <section id="apply" className="relative py-28 sm:py-36 lg:py-48 bg-cv-page border-t border-cv-border-subtle overflow-hidden">
       <div className="site-wrap relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           <div className="lg:col-span-6">

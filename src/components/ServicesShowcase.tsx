@@ -25,7 +25,7 @@ function ServiceCard({
     <article
       className={`relative flex h-full min-h-0 flex-col overflow-hidden rounded-[28px] p-7 sm:p-8 lg:p-9 ${
         light
-          ? 'cv-surface-card text-cv-fg'
+          ? `service-card-light cv-surface-card text-cv-fg ${featured ? 'service-card-light--featured' : ''}`
           : 'bg-[#0a0c10] text-white border border-cv-border-subtle'
       } ${featured ? 'min-h-[560px]' : ''} ${className}`}
     >
@@ -35,14 +35,11 @@ function ServiceCard({
           alt=""
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"
-          className="pointer-events-none z-0 object-cover object-right-bottom"
+          className="service-card-art pointer-events-none z-0 object-cover object-right-bottom"
         />
       )}
       {light && (
-        <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-cv-card via-cv-card/88 to-cv-card/25"
-          aria-hidden
-        />
+        <div className="service-card-scrim pointer-events-none absolute inset-0 z-[1]" aria-hidden />
       )}
       {featured && (
         <div
@@ -183,7 +180,7 @@ export default function ServicesShowcase() {
               alt=""
               fill
               sizes="(min-width: 1024px) 33vw, 100vw"
-              className="object-cover"
+              className="services-orbs-art object-cover"
             />
           </div>
           <ServiceCard cap={mobile} variant="light" siteLight={siteLight} />

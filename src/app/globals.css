@@ -41,40 +41,40 @@
 
 @layer base {
   :root {
-    --cv-page: #e9ebf0;
-    --cv-page-alt: #e1e4ea;
-    --cv-elevated: #f3f4f8;
-    --cv-card: #fafbfc;
-    --cv-fg: #090b0f;
-    --cv-fg-muted: #4a5260;
-    --cv-fg-subtle: #5c6574;
-    --cv-border: rgba(9, 11, 15, 0.11);
-    --cv-border-subtle: rgba(9, 11, 15, 0.06);
-    --cv-on-accent: #07080b;
-    --cv-nav: rgba(243, 244, 248, 0.94);
-    --cv-input: #f6f7f9;
-    --cv-scrollbar-track: #dfe2e8;
-    --cv-scrollbar-thumb: #c5cad3;
-    --cv-scrollbar-thumb-hover: #a8b0bc;
+    --cv-page: #f6f7f9;
+    --cv-page-alt: #eceef2;
+    --cv-elevated: #fafbfc;
+    --cv-card: #ffffff;
+    --cv-fg: #0c0e12;
+    --cv-fg-muted: #3d4654;
+    --cv-fg-subtle: #566070;
+    --cv-border: rgba(12, 14, 18, 0.09);
+    --cv-border-subtle: rgba(12, 14, 18, 0.055);
+    --cv-on-accent: #071210;
+    --cv-nav: rgba(255, 255, 255, 0.88);
+    --cv-input: #ffffff;
+    --cv-scrollbar-track: #e8eaef;
+    --cv-scrollbar-thumb: #c8ccd4;
+    --cv-scrollbar-thumb-hover: #aeb4bf;
     --cv-glass-bg: linear-gradient(
-      145deg,
-      rgba(250, 251, 252, 0.98) 0%,
-      rgba(243, 244, 248, 0.9) 100%
+      165deg,
+      rgba(255, 255, 255, 0.98) 0%,
+      rgba(250, 251, 252, 0.94) 100%
     );
-    --cv-glass-border: rgba(9, 11, 15, 0.08);
-    --cv-glass-shadow: 0 1px 2px rgba(9, 11, 15, 0.04), 0 12px 32px rgba(9, 11, 15, 0.06);
-    --cv-advantage-bg: #eef0f4;
-    --cv-advantage-fg: #090b0f;
-    --cv-advantage-muted: rgba(9, 11, 15, 0.58);
-    --cv-stat-divider: rgba(9, 11, 15, 0.1);
-    --cv-shadow-card: 0 1px 2px rgba(9, 11, 15, 0.04), 0 8px 24px rgba(9, 11, 15, 0.06);
-    --cv-header-shadow: 0 8px 28px rgba(9, 11, 15, 0.06);
-    --cv-btn-shadow: 0 4px 14px rgba(0, 191, 165, 0.22);
+    --cv-glass-border: rgba(12, 14, 18, 0.07);
+    --cv-glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 24px rgba(12, 14, 18, 0.05);
+    --cv-advantage-bg: #f0f1f4;
+    --cv-advantage-fg: #0c0e12;
+    --cv-advantage-muted: rgba(12, 14, 18, 0.62);
+    --cv-stat-divider: rgba(12, 14, 18, 0.09);
+    --cv-shadow-card: 0 1px 0 rgba(12, 14, 18, 0.04), 0 4px 16px rgba(12, 14, 18, 0.045);
+    --cv-header-shadow: 0 4px 20px rgba(12, 14, 18, 0.05);
+    --cv-btn-shadow: 0 2px 10px rgba(0, 168, 146, 0.2);
 
     --background: var(--cv-page);
     --foreground: var(--cv-fg);
-    --accent-emerald: #00BFA5;
-    --accent-glow: rgba(0, 191, 165, 0.14);
+    --accent-emerald: #00a892;
+    --accent-glow: rgba(0, 168, 146, 0.12);
   }
 
   .dark {
@@ -1320,5 +1320,198 @@ html:not(.dark) .portfolio-tag {
 html:not(.dark) .portfolio-media {
   border-color: var(--cv-border);
   background: var(--cv-elevated);
+}
+
+/* —— Light theme polish: type, sections, cards, interactions —— */
+
+html:not(.dark) .cv-kicker {
+  color: #008975;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+}
+
+html:not(.dark) .site-wrap > section h2,
+html:not(.dark) .site-wrap h2.text-cv-fg {
+  color: var(--cv-fg);
+  letter-spacing: -0.038em;
+  font-weight: 700;
+}
+
+html:not(.dark) .site-wrap > section > div > .max-w-3xl p.text-cv-fg-subtle,
+html:not(.dark) .site-wrap > section > div > .max-w-2xl p.text-cv-fg-subtle,
+html:not(.dark) .site-wrap > section p.text-cv-fg-subtle.leading-relaxed {
+  color: var(--cv-fg-muted);
+}
+
+html:not(.dark) section.border-t.border-cv-border-subtle {
+  border-top-color: var(--cv-border-subtle);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+html:not(.dark) .cv-surface-card {
+  border-color: var(--cv-border-subtle);
+  box-shadow: var(--cv-shadow-card);
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+html:not(.dark) .cv-surface-card:hover {
+  border-color: rgba(0, 168, 146, 0.22);
+  box-shadow:
+    0 1px 0 rgba(12, 14, 18, 0.04),
+    0 8px 22px rgba(12, 14, 18, 0.07);
+}
+
+html:not(.dark) .cv-light-panel {
+  border: 1px solid var(--cv-border-subtle);
+  box-shadow: var(--cv-shadow-card);
+}
+
+html:not(.dark) .cv-btn-primary {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+html:not(.dark) .cv-btn-primary:hover {
+  box-shadow: 0 4px 16px rgba(0, 168, 146, 0.26);
+}
+
+html:not(.dark) .cv-btn-secondary {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+html:not(.dark) .cv-btn-secondary:hover {
+  border-color: rgba(0, 168, 146, 0.2);
+  color: var(--cv-fg);
+}
+
+html:not(.dark) .hero-section.hero--light {
+  background: var(--cv-page);
+}
+
+@media (min-width: 1024px) {
+  html:not(.dark) .hero-section.hero--light {
+    justify-content: flex-end;
+  }
+
+  html:not(.dark) .hero--light .hero-content-shell {
+    padding-bottom: 5.5rem;
+    padding-top: 6.5rem;
+  }
+
+  html:not(.dark) .hero--light .hero-copy {
+    max-width: 34rem;
+  }
+}
+
+html:not(.dark) .hero--light .hero-copy h1 {
+  letter-spacing: -0.042em;
+  line-height: 1.01;
+}
+
+html:not(.dark) .hero--light .hero-copy p {
+  color: var(--cv-fg-muted);
+  max-width: 32rem;
+}
+
+html:not(.dark) .service-card-light .service-card-art {
+  object-position: 92% 88%;
+  opacity: 0.92;
+}
+
+html:not(.dark) .service-card-light .service-card-scrim {
+  background: linear-gradient(
+    100deg,
+    var(--cv-card) 0%,
+    color-mix(in srgb, var(--cv-card) 92%, transparent) 40%,
+    color-mix(in srgb, var(--cv-card) 55%, transparent) 62%,
+    transparent 100%
+  );
+}
+
+html:not(.dark) .service-card-light.service-card-light--featured .service-card-scrim {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cv-card) 88%, transparent) 0%,
+    var(--cv-card) 72%
+  );
+}
+
+html:not(.dark) .services-orbs-tile .services-orbs-art {
+  object-position: center 42%;
+  transition: transform 0.45s ease;
+}
+
+html:not(.dark) .services-orbs-tile:hover .services-orbs-art {
+  transform: scale(1.03);
+}
+
+html:not(.dark) .portfolio-card {
+  border-color: var(--cv-border-subtle);
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+html:not(.dark) .portfolio-card:hover {
+  border-color: rgba(0, 168, 146, 0.18);
+  box-shadow:
+    0 1px 0 rgba(12, 14, 18, 0.04),
+    0 10px 26px rgba(12, 14, 18, 0.07);
+}
+
+html:not(.dark) .portfolio-card-glow {
+  opacity: 0.2;
+}
+
+html:not(.dark) .portfolio-spotlight-media {
+  aspect-ratio: 16 / 9;
+  box-shadow: var(--cv-shadow-card);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+html:not(.dark) .portfolio-card:hover .portfolio-spotlight-media {
+  transform: scale(1.01);
+}
+
+html:not(.dark) .portfolio-spotlight-media img {
+  transition: transform 0.45s ease;
+}
+
+html:not(.dark) .portfolio-card:hover .portfolio-spotlight-media img {
+  transform: scale(1.03);
+}
+
+html:not(.dark) #portfolio {
+  background: var(--cv-page-alt);
+}
+
+html:not(.dark) #founder {
+  background: var(--cv-page-alt);
+}
+
+html:not(.dark) #faq {
+  background: var(--cv-page-alt);
+}
+
+html:not(.dark) #models {
+  background: var(--cv-page);
+}
+
+html:not(.dark) #perks {
+  background: var(--cv-page);
+}
+
+html:not(.dark) #apply {
+  background: var(--cv-page);
 }
 

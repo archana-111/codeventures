@@ -77,7 +77,9 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
   return (
     <section
       ref={containerRef}
-      className="hero-section relative min-h-[100svh] w-full flex flex-col justify-end overflow-hidden bg-cv-page"
+      className={`hero-section relative min-h-[100svh] w-full flex flex-col justify-end overflow-hidden bg-cv-page ${
+        isLight ? 'hero--light' : ''
+      }`}
     >
       {/* 3D Geometric Background Image with High-Res Presentation */}
       <div
@@ -110,7 +112,7 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
       {/* Main Hero Container: Clean Content Aligned to Left Bottom Corner */}
       <div
         ref={contentRef}
-        className="relative z-10 site-wrap w-full pb-[max(4rem,env(safe-area-inset-bottom))] sm:pb-20 lg:pb-[7.5rem] pt-28 sm:pt-36 lg:pt-40"
+        className="hero-content-shell relative z-10 site-wrap w-full pb-[max(4rem,env(safe-area-inset-bottom))] sm:pb-20 lg:pb-[7.5rem] pt-28 sm:pt-36 lg:pt-40"
       >
         <div className="hero-copy max-w-[40rem] flex flex-col items-start text-left">
           <p

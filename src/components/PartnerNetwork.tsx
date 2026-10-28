@@ -7,7 +7,7 @@ import { PARTNER_PERKS } from '@/data/codeventures-data';
 
 export default function PartnerNetwork() {
   return (
-    <section id="perks" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page-alt border-t border-cv-border-subtle">
+    <section id="perks" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page border-t border-cv-border-subtle">
       <div className="site-wrap">
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
           <p className="text-sm font-medium text-[#00BFA5] mb-5">Founder ecosystem perks</p>

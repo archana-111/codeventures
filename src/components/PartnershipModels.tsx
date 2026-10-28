@@ -41,7 +41,7 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
   };
 
   return (
-    <section id="models" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page-alt border-t border-cv-border-subtle">
+    <section id="models" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page border-t border-cv-border-subtle">
       <div className="site-wrap">
         <div className="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold text-cv-fg tracking-[-0.035em] leading-[1.04] mb-5">

@@ -3,8 +3,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useTheme } from '@/components/ThemeProvider';
-
 // Counter hook that replicates the exact HyKr intersection counter animation
 function NumberCounter({
   value,
@@ -154,12 +152,6 @@ const cu = (val: number) => `calc(${val} * var(--u))`;
 const cuy = (val: number) => `calc(${val} * var(--uy))`;
 
 export default function ImpactMetrics() {
-  const { theme, mounted } = useTheme();
-  const isLight = mounted && theme === 'light';
-  const studioBgSrc = isLight
-    ? '/assets/studio-forms-light.jpg'
-    : '/assets/studio-forms.jpg';
-
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLElement>(null);
   const stemRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -314,15 +306,19 @@ export default function ImpactMetrics() {
           {/* Studio Feature Background */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={studioBgSrc}
-            alt="CodeVentures geometric studio forms"
-            className="sst-bg"
+            src="/assets/studio-forms.jpg"
+            alt=""
+            className="sst-bg sst-bg-theme-dark"
             loading="lazy"
           />
-          <div
-            className={isLight ? 'sst-bg-overlay sst-bg-overlay--light' : 'sst-bg-overlay'}
-            aria-hidden="true"
+          <img
+            src="/assets/studio-forms-light.jpg"
+            alt="CodeVentures geometric studio forms"
+            className="sst-bg sst-bg-theme-light"
+            loading="lazy"
           />
+          <div className="sst-bg-overlay sst-bg-overlay-theme-dark" aria-hidden="true" />
+          <div className="sst-bg-overlay sst-bg-overlay--light sst-bg-overlay-theme-light" aria-hidden="true" />
 
           {/* 6 Ascending Stems & Concentric Marker Dots */}
           {NODES.map((node, idx) => (
@@ -372,20 +368,12 @@ export default function ImpactMetrics() {
 
           {/* Studio Copy — hero typography */}
           <div className="sst-copy">
-            <h2
-              className={`sst-h2 text-4xl sm:text-5xl md:text-6xl lg:text-[64px] xl:text-[72px] font-bold tracking-[-0.035em] leading-[1.04] ${
-                isLight ? 'text-cv-fg' : 'text-white'
-              }`}
-            >
+            <h2 className="sst-h2 sst-studio-title text-4xl sm:text-5xl md:text-6xl lg:text-[64px] xl:text-[72px] font-bold tracking-[-0.035em] leading-[1.04]">
               A studio of operators,
               <br />
               not just investors.
             </h2>
-            <p
-              className={`sst-sub text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl ${
-                isLight ? 'text-cv-fg-subtle' : 'text-neutral-300'
-              }`}
-            >
+            <p className="sst-sub sst-studio-body text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl">
               The Cheque is where most investors stop. It&apos;s where we start.
               We build alongside you on product, go-to-market,
               and growth — from idea to revenue to real scale.
@@ -396,20 +384,12 @@ export default function ImpactMetrics() {
 
       {/* 3. Mobile Fallback (Hidden on >=761px, Visible on Mobile) */}
       <section className="studio sst-mobile" data-no-motion="true">
-        <h2
-          className={`sst-m-h2 text-4xl font-bold tracking-[-0.035em] leading-[1.04] ${
-            isLight ? 'text-cv-fg' : 'text-white'
-          }`}
-        >
+        <h2 className="sst-m-h2 sst-studio-title text-4xl font-bold tracking-[-0.035em] leading-[1.04]">
           A studio of operators,
           <br />
           not just investors.
         </h2>
-        <p
-          className={`sst-m-sub text-base font-normal leading-relaxed ${
-            isLight ? 'text-cv-fg-subtle' : 'text-neutral-300'
-          }`}
-        >
+        <p className="sst-m-sub sst-studio-body text-base font-normal leading-relaxed">
           The Cheque is where most investors stop. It&apos;s where we start. We
           build alongside you on product, go-to-market, and growth — from
           idea to revenue to real scale.
@@ -431,16 +411,15 @@ export default function ImpactMetrics() {
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/assets/studio-forms.jpg" alt="" className="sst-m-art sst-bg-theme-dark" loading="lazy" />
         <img
-          src={studioBgSrc}
+          src="/assets/studio-forms-light.jpg"
           alt="CodeVentures geometric studio forms"
-          className="sst-m-art"
+          className="sst-m-art sst-bg-theme-light"
           loading="lazy"
         />
-        <div
-          className={isLight ? 'sst-m-overlay sst-m-overlay--light' : 'sst-m-overlay'}
-          aria-hidden="true"
-        />
+        <div className="sst-m-overlay sst-bg-overlay-theme-dark" aria-hidden="true" />
+        <div className="sst-m-overlay sst-m-overlay--light sst-bg-overlay-theme-light" aria-hidden="true" />
       </section>
     </div>
   );

@@ -32,8 +32,8 @@ const FEATURE_ICONS = [
 ];
 
 export default function PartnershipModels({ onOpenApply }: PartnershipModelsProps) {
-  const { theme, mounted } = useTheme();
-  const siteLight = mounted && theme === 'light';
+  const { theme } = useTheme();
+  const siteLight = theme === 'light';
 
   const openApply = (modelName: string) => {
     if (onOpenApply) onOpenApply(modelName);
@@ -44,11 +44,10 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
     <section id="models" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page-alt border-t border-cv-border-subtle">
       <div className="site-wrap">
         <div className="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
-          <p className="cv-kicker mb-5">Partnership models</p>
-          <h2 className="cv-section-heading text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold tracking-[-0.035em] leading-[1.04] mb-5">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold text-cv-fg tracking-[-0.035em] leading-[1.04] mb-5">
             Choose how we build together.
           </h2>
-          <p className="cv-section-lead text-base sm:text-lg font-normal">
+          <p className="text-base sm:text-lg text-cv-fg-muted font-normal leading-relaxed">
             Every startup is unique. As the startup studio for development agency
             Armia Systems, Inc., our partnership models combine cash discounts with
             negotiated equity so we’re deeply invested in your long-term success.
@@ -72,7 +71,7 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
                     ? 'text-white border border-[#00BFA5]/35 shadow-[0_24px_70px_rgba(0,191,165,0.22)]'
                     : featuredLight
                       ? 'cv-surface-card text-cv-fg border-emerald-500/30 ring-1 ring-emerald-500/12'
-                      : `bg-cv-elevated border border-cv-border-subtle text-cv-fg ${siteLight ? 'cv-light-panel' : ''}`
+                      : 'bg-cv-elevated border border-cv-border-subtle text-cv-fg'
                 }`}
                 style={
                   featuredDark

@@ -1235,3 +1235,90 @@ html:not(.dark) .hero-copy {
   text-shadow: 0 1px 0 color-mix(in srgb, var(--cv-page) 80%, transparent);
 }
 
+/* Studio + portfolio: same DOM as dark; theme via CSS (avoids layout shift) */
+html:not(.dark) .sst-bg-theme-dark,
+html:not(.dark) .sst-bg-overlay-theme-dark {
+  display: none;
+}
+
+html.dark .sst-bg-theme-light,
+html.dark .sst-bg-overlay-theme-light {
+  display: none;
+}
+
+html:not(.dark) .sst-studio-title,
+html:not(.dark) .sst-m-h2.sst-studio-title {
+  color: var(--cv-fg);
+}
+
+html:not(.dark) .sst-studio-body,
+html:not(.dark) .sst-m-sub.sst-studio-body {
+  color: var(--cv-fg-subtle);
+}
+
+.dark .sst-studio-title,
+.dark .sst-m-h2.sst-studio-title {
+  color: #ffffff;
+}
+
+.dark .sst-studio-body,
+.dark .sst-m-sub.sst-studio-body {
+  color: rgb(212 212 212);
+}
+
+html:not(.dark) .services-orbs-tile {
+  background: var(--cv-elevated);
+  border: 1px solid var(--cv-border);
+  box-shadow: var(--cv-shadow-card);
+}
+
+html:not(.dark) .portfolio-card {
+  background: var(--cv-card);
+  border-color: var(--cv-border);
+  color: var(--cv-fg);
+  box-shadow: var(--cv-shadow-card);
+}
+
+html:not(.dark) .portfolio-card-glow {
+  opacity: 0.32;
+}
+
+html.dark .portfolio-card-glow {
+  opacity: 1;
+}
+
+html:not(.dark) .portfolio-vignette-dark {
+  display: none;
+}
+
+html.dark .portfolio-vignette-light {
+  display: none;
+}
+
+html:not(.dark) .portfolio-card-title {
+  color: var(--cv-fg);
+}
+
+html:not(.dark) .portfolio-card-summary {
+  color: var(--cv-fg-subtle);
+}
+
+html:not(.dark) .portfolio-card-outcome {
+  color: var(--cv-fg-muted);
+}
+
+html:not(.dark) .portfolio-card-outcome-label {
+  color: var(--cv-fg);
+}
+
+html:not(.dark) .portfolio-tag {
+  background: var(--cv-elevated);
+  color: var(--cv-fg-muted);
+  box-shadow: inset 0 0 0 1px var(--cv-border-subtle);
+}
+
+html:not(.dark) .portfolio-media {
+  border-color: var(--cv-border);
+  background: var(--cv-elevated);
+}
+

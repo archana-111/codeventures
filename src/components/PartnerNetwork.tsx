@@ -24,7 +24,7 @@ export default function PartnerNetwork() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-12">
           {PARTNER_PERKS.map((perk) => (
-            <div key={perk.name} className="cv-light-panel rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-7 sm:p-8 flex flex-col">
+            <div key={perk.name} className="cv-light-panel rounded-[18px] border border-cv-border-subtle p-7 sm:p-8 flex flex-col">
               <div className="flex items-center justify-between mb-8">
                 <div className="relative h-8 w-28 flex items-center justify-start dark:brightness-200 dark:contrast-125">
                   <Image
@@ -49,7 +49,7 @@ export default function PartnerNetwork() {
           ))}
         </div>
 
-        <div className="cv-light-panel rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="cv-light-panel rounded-[18px] border border-cv-border-subtle p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <h4 className="text-xl font-bold text-cv-fg tracking-[-0.03em] leading-[1.15] mb-2">
               Need specialized enterprise partnerships?

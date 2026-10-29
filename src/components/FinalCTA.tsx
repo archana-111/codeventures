@@ -76,7 +76,7 @@ export default function FinalCTA({ preselectedModel }: FinalCTAProps) {
           </div>
 
           <div className="lg:col-span-6">
-            <div className="cv-light-panel rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-8 sm:p-10">
+            <div className="cv-light-panel rounded-[18px] border border-cv-border-subtle p-8 sm:p-10">
               {submitted ? (
                 <div className="py-12 text-center space-y-4">
                   <CheckCircle2 className="w-10 h-10 text-[#00BFA5] mx-auto mb-2" />

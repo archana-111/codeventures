@@ -5,6 +5,15 @@ import Image from 'next/image';
 import { CAPABILITIES, type CapabilityItem } from '@/data/codeventures-data';
 import { useTheme } from '@/components/ThemeProvider';
 
+const DARK_TEAL_GRADIENT = {
+  featured:
+    'radial-gradient(ellipse 140% 90% at 50% -8%, #7ff5e0 0%, #00BFA5 28%, rgba(0,191,165,0.18) 52%, transparent 70%)',
+  tall:
+    'radial-gradient(ellipse 135% 88% at 22% -10%, #7ff5e0 0%, #00BFA5 26%, rgba(0,191,165,0.17) 50%, transparent 72%)',
+  compact:
+    'radial-gradient(ellipse 125% 82% at 78% -8%, #7ff5e0 0%, #00BFA5 24%, rgba(0,191,165,0.15) 48%, transparent 70%)',
+} as const;
+
 function ServiceCard({
   cap,
   variant,
@@ -18,8 +27,13 @@ function ServiceCard({
   className?: string;
   siteLight: boolean;
 }) {
-  const light = variant === 'light' || (variant === 'featured' && siteLight);
   const featured = variant === 'featured';
+  const light = siteLight;
+  const darkTealGradient = featured
+    ? DARK_TEAL_GRADIENT.featured
+    : wide
+      ? DARK_TEAL_GRADIENT.tall
+      : DARK_TEAL_GRADIENT.compact;
 
   return (
     <article
@@ -41,17 +55,29 @@ function ServiceCard({
       {light && (
         <div className="service-card-scrim pointer-events-none absolute inset-0 z-[1]" aria-hidden />
       )}
-      {featured && (
+      {light && (
         <div
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-0 z-[2]"
           style={{
-            background:
-              'radial-gradient(ellipse 140% 90% at 50% -8%, #7ff5e0 0%, #00BFA5 28%, rgba(0,191,165,0.18) 52%, transparent 70%)',
-            opacity: light ? 0.42 : 1,
+            background: darkTealGradient,
+            opacity: featured ? 0.42 : wide ? 0.36 : 0.32,
           }}
+          aria-hidden
         />
       )}
-
+      {!light && (
+        <>
+          <div
+            className="pointer-events-none absolute inset-0 z-0"
+            style={{ background: darkTealGradient }}
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0c10]/15 via-[#0a0c10]/45 to-[#0a0c10]/92"
+            aria-hidden
+          />
+        </>
+      )}
       {featured && (
         <p
           className={`relative z-10 mb-auto text-[13px] font-medium ${
@@ -172,7 +198,7 @@ export default function ServicesShowcase() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
-          <ServiceCard cap={web} variant="light" siteLight={siteLight} className="lg:row-span-2" />
+          <ServiceCard cap={web} variant="light" wide siteLight={siteLight} className="lg:row-span-2" />
           <ServiceCard cap={deep} variant="featured" siteLight={siteLight} className="lg:row-span-2" />
           <div className="services-orbs-tile relative min-h-[240px] overflow-hidden rounded-[28px] bg-black lg:min-h-[280px]">
             <Image

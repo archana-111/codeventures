@@ -6,7 +6,7 @@ import { TESTIMONIALS } from '@/data/codeventures-data';
 
 export default function FounderSection() {
   return (
-    <section id="founder" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page-alt border-t border-cv-border-subtle">
+    <section id="founder" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page border-t border-cv-border-subtle">
       <div className="site-wrap">
         <div className="cv-light-panel rounded-[18px] bg-cv-elevated/90 backdrop-blur-xl border border-cv-border p-8 sm:p-12 lg:p-16 mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">

@@ -42,33 +42,36 @@
 @layer base {
   :root {
     --cv-page: #fafafa;
-    --cv-page-alt: #f5f5f5;
-    --cv-elevated: #fafafa;
+    --cv-page-alt: #fafafa;
+    --cv-elevated: #f5f5f5;
     --cv-card: #ffffff;
-    --cv-fg: #0c0e12;
-    --cv-fg-muted: #3d4654;
-    --cv-fg-subtle: #566070;
-    --cv-border: rgba(12, 14, 18, 0.09);
-    --cv-border-subtle: rgba(12, 14, 18, 0.055);
+    --cv-fg: #0a0a0a;
+    --cv-fg-muted: #525252;
+    --cv-fg-subtle: #737373;
+    --cv-border: rgba(10, 10, 10, 0.08);
+    --cv-border-subtle: rgba(10, 10, 10, 0.045);
     --cv-on-accent: #071210;
-    --cv-nav: rgba(250, 250, 250, 0.92);
+    --cv-nav: rgba(250, 250, 250, 0.86);
     --cv-input: #ffffff;
-    --cv-scrollbar-track: #f0f0f0;
-    --cv-scrollbar-thumb: #c8ccd4;
-    --cv-scrollbar-thumb-hover: #aeb4bf;
+    --cv-scrollbar-track: #fafafa;
+    --cv-scrollbar-thumb: #d4d4d4;
+    --cv-scrollbar-thumb-hover: #a3a3a3;
     --cv-glass-bg: linear-gradient(
       165deg,
-      rgba(255, 255, 255, 0.98) 0%,
-      rgba(250, 250, 250, 0.94) 100%
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(250, 250, 250, 0.92) 100%
     );
-    --cv-glass-border: rgba(12, 14, 18, 0.07);
-    --cv-glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 24px rgba(12, 14, 18, 0.05);
-    --cv-advantage-bg: #f5f5f5;
-    --cv-advantage-fg: #0c0e12;
-    --cv-advantage-muted: rgba(12, 14, 18, 0.62);
-    --cv-stat-divider: rgba(12, 14, 18, 0.09);
-    --cv-shadow-card: 0 1px 0 rgba(12, 14, 18, 0.04), 0 4px 16px rgba(12, 14, 18, 0.045);
-    --cv-header-shadow: 0 4px 20px rgba(12, 14, 18, 0.05);
+    --cv-glass-border: rgba(10, 10, 10, 0.06);
+    --cv-glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.95), 0 12px 40px rgba(0, 0, 0, 0.04);
+    --cv-advantage-bg: #fafafa;
+    --cv-advantage-fg: #0a0a0a;
+    --cv-advantage-muted: rgba(10, 10, 10, 0.58);
+    --cv-stat-divider: rgba(10, 10, 10, 0.08);
+    --cv-shadow-card:
+      0 0 0 1px rgba(0, 0, 0, 0.035),
+      0 1px 2px rgba(0, 0, 0, 0.03),
+      0 10px 32px rgba(0, 0, 0, 0.035);
+    --cv-header-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 8px 28px rgba(0, 0, 0, 0.04);
     --cv-btn-shadow: 0 2px 10px rgba(0, 168, 146, 0.2);
 
     --background: var(--cv-page);
@@ -381,8 +384,8 @@ html:not(.dark) .cv-surface-card {
 .sst-bg-overlay--light {
   background: linear-gradient(
     to top,
-    rgba(233, 235, 240, 0.55) 0%,
-    rgba(233, 235, 240, 0.12) 52%,
+    rgba(250, 250, 250, 0.92) 0%,
+    rgba(250, 250, 250, 0.35) 52%,
     transparent 100%
   );
 }
@@ -1142,7 +1145,8 @@ html:not(.dark) .glass-card {
 }
 
 html:not(.dark) .hero-stats {
-  background: var(--cv-page-alt);
+  background: var(--cv-page);
+  border-top: 1px solid var(--cv-border-subtle);
 }
 
 html:not(.dark) .hstat-num {
@@ -1195,7 +1199,7 @@ html:not(.dark) .cv-light-panel {
 html:not(.dark) .hero-section.hero--light {
   min-height: min(100svh, 920px);
   border-bottom: 1px solid var(--cv-border-subtle);
-  background: #fafafa;
+  background: var(--cv-page);
   isolation: isolate;
 }
 
@@ -1204,9 +1208,9 @@ html:not(.dark) .hero-light-depth {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(120% 85% at 8% 12%, #ffffff 0%, transparent 58%),
-    radial-gradient(70% 55% at 92% 88%, rgba(0, 168, 146, 0.07) 0%, transparent 62%),
-    linear-gradient(168deg, #ffffff 0%, var(--cv-page) 52%, #f0f0f0 100%);
+    radial-gradient(115% 80% at 6% 8%, rgba(255, 255, 255, 0.85) 0%, transparent 55%),
+    radial-gradient(65% 50% at 94% 90%, rgba(0, 168, 146, 0.05) 0%, transparent 60%),
+    linear-gradient(180deg, #fafafa 0%, var(--cv-page) 100%);
 }
 
 html:not(.dark) .hero-light-art-panel {
@@ -1546,7 +1550,6 @@ html:not(.dark) .site-wrap > section p.text-cv-fg-subtle.leading-relaxed {
 
 html:not(.dark) section.border-t.border-cv-border-subtle {
   border-top-color: var(--cv-border-subtle);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 html:not(.dark) .cv-surface-card {
@@ -1559,10 +1562,11 @@ html:not(.dark) .cv-surface-card {
 }
 
 html:not(.dark) .cv-surface-card:hover {
-  border-color: rgba(0, 168, 146, 0.22);
+  border-color: rgba(0, 168, 146, 0.2);
   box-shadow:
-    0 1px 0 rgba(12, 14, 18, 0.04),
-    0 8px 22px rgba(12, 14, 18, 0.07);
+    0 0 0 1px rgba(0, 168, 146, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.03),
+    0 16px 40px rgba(0, 0, 0, 0.06);
 }
 
 html:not(.dark) .cv-light-panel {
@@ -1661,16 +1665,10 @@ html:not(.dark) .portfolio-card:hover .portfolio-spotlight-media img {
   transform: scale(1.03);
 }
 
-html:not(.dark) #portfolio {
-  background: var(--cv-page-alt);
-}
-
-html:not(.dark) #founder {
-  background: var(--cv-page-alt);
-}
-
+html:not(.dark) #portfolio,
+html:not(.dark) #founder,
 html:not(.dark) #faq {
-  background: var(--cv-page-alt);
+  background: var(--cv-page);
 }
 
 html:not(.dark) #models {

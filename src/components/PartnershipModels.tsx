@@ -71,7 +71,7 @@ export default function PartnershipModels({ onOpenApply }: PartnershipModelsProp
                     ? 'text-white border border-[#00BFA5]/35 shadow-[0_24px_70px_rgba(0,191,165,0.22)]'
                     : featuredLight
                       ? 'cv-surface-card text-cv-fg border-emerald-500/30 ring-1 ring-emerald-500/12'
-                      : 'bg-cv-elevated border border-cv-border-subtle text-cv-fg'
+                      : 'cv-surface-card border border-cv-border-subtle text-cv-fg'
                 }`}
                 style={
                   featuredDark

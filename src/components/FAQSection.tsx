@@ -23,7 +23,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page-alt border-t border-cv-border-subtle">
+    <section id="faq" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page border-t border-cv-border-subtle">
       <div className="site-wrap">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           <div className="lg:col-span-5 lg:sticky lg:top-36 h-fit">

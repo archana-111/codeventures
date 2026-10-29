@@ -73,7 +73,7 @@ export default function FeaturedPortfolio() {
   const secondaryProjects = filteredProjects.slice(4);
 
   return (
-    <section id="portfolio" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page-alt border-t border-cv-border-subtle">
+    <section id="portfolio" className="relative py-24 sm:py-32 lg:py-40 bg-cv-page border-t border-cv-border-subtle">
       <div className="site-wrap">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
           <div className="max-w-2xl">

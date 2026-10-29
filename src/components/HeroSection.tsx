@@ -150,9 +150,9 @@ export default function HeroSection({ onOpenApply }: HeroSectionProps) {
           fill
           priority
           quality={95}
-          className="hero-bg-image object-cover object-center sm:object-right-top transform-gpu"
+          className="hero-bg-image object-cover transform-gpu"
         />
-        <div className="absolute inset-0 bg-black/60 pointer-events-none" aria-hidden />
+        <div className="hero-dark-scrim pointer-events-none" aria-hidden />
       </div>
 
       <div

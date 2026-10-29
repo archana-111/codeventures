@@ -203,6 +203,37 @@ html:not(.dark) .cv-surface-card {
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 191, 165, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
+/* Dark hero: vignette scrim (avoids flat grey band behind copy) */
+.hero-dark-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      to top,
+      rgba(7, 8, 11, 0.88) 0%,
+      rgba(7, 8, 11, 0.35) 38%,
+      rgba(7, 8, 11, 0.08) 62%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(7, 8, 11, 0.72) 0%,
+      rgba(7, 8, 11, 0.28) 42%,
+      transparent 72%
+    );
+}
+
+.hero-bg-image {
+  object-position: 58% 22%;
+}
+
+@media (min-width: 640px) {
+  .hero-bg-image {
+    object-position: 72% 18%;
+  }
+}
+
 /* Subtle architectural coordinate grid */
 .hero-grid-pattern {
   background-image: 
@@ -1597,17 +1628,21 @@ html:not(.dark) .cv-btn-secondary:hover {
   color: var(--cv-fg);
 }
 
+html:not(.dark) .service-card-light.cv-surface-card {
+  background-color: #fafafa;
+}
+
 html:not(.dark) .service-card-light .service-card-art {
   object-position: 92% 88%;
-  opacity: 0.92;
+  opacity: 0.55;
 }
 
 html:not(.dark) .service-card-light .service-card-scrim {
   background: linear-gradient(
     100deg,
-    var(--cv-card) 0%,
-    color-mix(in srgb, var(--cv-card) 92%, transparent) 40%,
-    color-mix(in srgb, var(--cv-card) 55%, transparent) 62%,
+    #fafafa 0%,
+    color-mix(in srgb, #fafafa 88%, transparent) 42%,
+    color-mix(in srgb, #fafafa 45%, transparent) 68%,
     transparent 100%
   );
 }
@@ -1615,8 +1650,8 @@ html:not(.dark) .service-card-light .service-card-scrim {
 html:not(.dark) .service-card-light.service-card-light--featured .service-card-scrim {
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--cv-card) 88%, transparent) 0%,
-    var(--cv-card) 72%
+    color-mix(in srgb, #fafafa 88%, transparent) 0%,
+    #fafafa 72%
   );
 }
 

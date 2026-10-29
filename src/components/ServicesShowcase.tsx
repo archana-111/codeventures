@@ -89,15 +89,11 @@ function ServiceCard({
       )}
 
       <div
-        className={`relative z-[2] flex flex-1 ${
-          featured
-            ? 'mt-auto flex-col justify-end'
-            : wide
-              ? 'flex-col lg:flex-row lg:items-start lg:gap-16'
-              : 'flex-col'
+        className={`relative z-[2] flex min-h-0 flex-1 flex-col ${
+          featured ? 'mt-auto justify-end' : wide ? 'justify-between gap-8 lg:gap-10' : ''
         }`}
       >
-        <div className={wide ? 'lg:max-w-xl' : ''}>
+        <div className={wide ? 'max-w-xl shrink-0' : ''}>
           {!featured && (
             <p
               className={`mb-5 text-[13px] font-medium ${
@@ -133,8 +129,8 @@ function ServiceCard({
           </p>
         </div>
 
-        <div className={`mt-6 ${wide ? 'lg:mt-12 lg:flex-1' : ''}`}>
-          <ul className={`space-y-2.5 ${wide ? 'lg:columns-2 lg:gap-x-10' : ''}`}>
+        <div className={`${wide ? 'mt-auto w-full lg:max-w-none' : 'mt-6'}`}>
+          <ul className={`space-y-2.5 ${wide ? 'sm:columns-2 sm:gap-x-10' : ''}`}>
             {cap.deliverables.map((item) => (
               <li
                 key={item}
